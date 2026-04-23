@@ -502,7 +502,7 @@
                     
                     <hr style="border:none; border-top:1px solid var(--border); margin:15px 0;">
                     
-                    <input type="number" id="depAmount" class="modern-input" placeholder="Amount (Min 900 ETB)" style="background:white;">
+                    <input type="number" id="depAmount" class="modern-input" placeholder="Amount (Min 1200 ETB)" style="background:white;">
                     <input type="text" id="depRef" class="modern-input" placeholder="Transaction Reference ID" style="background:white;">
                     <button class="btn-primary" onclick="submitDeposit()">Submit Deposit</button>
                 </div>
@@ -519,7 +519,7 @@
                     <p style="color:var(--text-muted); font-size:0.9em; margin-bottom:5px;">Available Balance</p>
                     <strong id="withBal" style="color:var(--text-dark); font-size: 2em;">0.00</strong> <span style="font-size:0.9em; color:var(--text-muted);">ETB</span>
                 </div>
-                <input type="number" id="withAmount" class="modern-input" placeholder="Amount (Min 270 ETB)">
+                <input type="number" id="withAmount" class="modern-input" placeholder="Amount (Min 300 ETB, 15% Fee)">
                 <input type="password" id="withPass" class="modern-input" placeholder="Login Password to confirm">
                 <button class="btn-primary" onclick="submitWithdraw()">Request Payout</button>
             </div>
@@ -596,15 +596,15 @@
                     <div style="display: flex; justify-content: space-between; text-align: center; margin-top: 10px;">
                         <div style="flex: 1; border-right: 1px solid var(--border);">
                             <div style="color:var(--text-dark); font-weight:bold; font-size:1.1em;">Level 1</div>
-                            <div style="font-size:1.3em; color:var(--success); font-weight: 900; margin-top: 5px;">20%</div>
+                            <div style="font-size:1.3em; color:var(--success); font-weight: 900; margin-top: 5px;">25%</div>
                         </div>
                         <div style="flex: 1; border-right: 1px solid var(--border);">
                             <div style="color:var(--text-dark); font-weight:bold; font-size:1.1em;">Level 2</div>
-                            <div style="font-size:1.3em; color:var(--success); font-weight: 900; margin-top: 5px;">5%</div>
+                            <div style="font-size:1.3em; color:var(--success); font-weight: 900; margin-top: 5px;">8%</div>
                         </div>
                         <div style="flex: 1;">
                             <div style="color:var(--text-dark); font-weight:bold; font-size:1.1em;">Level 3</div>
-                            <div style="font-size:1.3em; color:var(--success); font-weight: 900; margin-top: 5px;">2%</div>
+                            <div style="font-size:1.3em; color:var(--success); font-weight: 900; margin-top: 5px;">5%</div>
                         </div>
                     </div>
                 </div>
@@ -713,12 +713,9 @@
                     <select id="bindType" class="modern-input">
                         <option value="CBE">CBE (Commercial Bank)</option>
                         <option value="Telebirr">Telebirr</option>
-                        <option value="Awash">Awash Bank</option>
-                        <option value="Dashen">Dashen Bank</option>
+                        
                         <option value="Abyssinia">Bank of Abyssinia</option>
-                        <option value="OIB">Oromia International Bank</option>
-                        <option value="Coop">Cooperative Bank of Oromia</option>
-                        <option value="M-Pesa">Safreicom M-Pesa</option>
+                    
                     </select>
 
                     <button class="btn-primary" style="margin-top:10px; font-size:1.05em; padding:18px; display:flex; align-items:center; justify-content:center; gap:10px;" onclick="saveBank()">
@@ -996,14 +993,14 @@
     <script>
         // --- FIREBASE CONFIGURATION ---
         const firebaseConfig = {
-            apiKey: "AIzaSyA3KL3wDAoyg9joJxA2yzPXrXQNnxZRpa8",
-            authDomain: "first-afa2a.firebaseapp.com",
-            databaseURL: "https://first-afa2a-default-rtdb.firebaseio.com",
-            projectId: "first-afa2a",
-            storageBucket: "first-afa2a.firebasestorage.app",
-            messagingSenderId: "676977016013",
-            appId: "1:676977016013:web:edc42e376bd7efcb893d84",
-            measurementId: "G-Q4BYYC30QT"
+            apiKey: "AIzaSyCpjM4ag00NcQOu13eYA_U8txHMY80hPC0",
+            authDomain: "nbaa-8b8fe.firebaseapp.com",
+            databaseURL: "https://nbaa-8b8fe-default-rtdb.firebaseio.com",
+            projectId: "nbaa-8b8fe",
+            storageBucket: "nbaa-8b8fe.firebasestorage.app",
+            messagingSenderId: "1007670379274",
+            appId: "1:1007670379274:web:db06072796fdc5748270f3",
+            measurementId: "G-NXJEQTP1QE"
         };
 
         const app = firebase.initializeApp(firebaseConfig);
@@ -1070,7 +1067,7 @@
                     if(snap.exists()) { showToast("Account already exists"); return; }
                     
                     const newUser = {
-                        phone: phone, pass: pass, balance: 50, 
+                        phone: phone, pass: pass, balance: 150, 
                         refCode: Math.random().toString(36).substring(2,8).toUpperCase(),
                         refBy: document.getElementById('authRef').value || "ROOT",
                         joinDate: Date.now(), totalDep: 0, totalWith: 0, today: 0, 
@@ -1078,7 +1075,7 @@
                     };
 
                     db.ref('users/' + uid).set(newUser).then(() => {
-                        showToast("Account created! +50 ETB Bonus");
+                        showToast("Account created! +150 ETB Bonus");
                         enterApp(newUser);
                     });
                 });
@@ -1355,7 +1352,7 @@
             const amt = document.getElementById('depAmount').value;
             const tid = document.getElementById('depRef').value;
             if(!amt || !tid) { showToast("Fill all fields"); return; }
-            if(parseInt(amt) < 900) { showToast("Minimum Deposit 900 ETB"); return; }
+            if(parseInt(amt) < 1200) { showToast("Minimum Deposit 1200 ETB"); return; }
 
             db.ref('deposits').push({
                 uid: "u_" + currentUser.phone, phone: currentUser.phone,
@@ -1377,23 +1374,25 @@
         function submitWithdraw() {
             const amt = parseInt(document.getElementById('withAmount').value);
             const pass = document.getElementById('withPass').value;
-            if(amt < 270) { showToast("Minimum 270 ETB"); return; }
+            if(amt < 300) { showToast("Minimum 300 ETB"); return; }
             if(amt > currentUser.balance) { showToast("Insufficient Balance"); return; }
             if(pass !== currentUser.pass) { showToast("Invalid Password"); return; } 
             
+            const netAmt = amt - (amt * 0.15); // 15% fee
+
             db.ref('users/u_' + currentUser.phone).update({ 
-                balance: currentUser.balance - amt, totalWith: (currentUser.totalWith || 0) + amt
+                balance: currentUser.balance - amt, totalWith: (currentUser.totalWith || 0) + netAmt
             });
             
             // Add bankDetails to the withdrawal request for Admin to see
             db.ref('withdrawals').push({ 
                 uid: "u_" + currentUser.phone, 
-                amount: amt, 
+                amount: netAmt, 
                 status: 'pending', 
                 date: Date.now(),
                 bankDetails: currentUser.bank || null
             });
-            showToast("Payout Requested"); 
+            showToast("Payout Requested! 15% fee applied."); 
             
             switchPage('pageHome', document.querySelectorAll('.nav-link')[0]);
             document.getElementById('withAmount').value = '';
