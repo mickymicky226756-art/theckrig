@@ -894,7 +894,7 @@
             
             <div class="admin-box">
                 <h4 style="color:var(--primary);">System Overview</h4>
-                <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px;">
+                <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-bottom: 10px;">
                     <div style="background:var(--secondary); padding:10px; border-radius:8px; text-align:center;">
                         <div style="font-size:0.8em; color:var(--text-muted);">Total Users</div>
                         <div id="admStatUsers" style="font-size:1.2em; font-weight:bold;">0</div>
@@ -906,6 +906,20 @@
                     <div style="background:var(--secondary); padding:10px; border-radius:8px; text-align:center;">
                         <div style="font-size:0.8em; color:var(--text-muted);">Total Invested</div>
                         <div id="admStatInvest" style="font-size:1.2em; font-weight:bold; color:var(--success);">0 ETB</div>
+                    </div>
+                </div>
+                <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px;">
+                    <div style="background:var(--secondary); padding:10px; border-radius:8px; text-align:center;">
+                        <div style="font-size:0.8em; color:var(--text-muted);">Total Deposit</div>
+                        <div id="admStatTotalDep" style="font-size:1.2em; font-weight:bold; color:var(--success);">0 ETB</div>
+                    </div>
+                    <div style="background:var(--secondary); padding:10px; border-radius:8px; text-align:center;">
+                        <div style="font-size:0.8em; color:var(--text-muted);">Total Withdraw</div>
+                        <div id="admStatTotalWith" style="font-size:1.2em; font-weight:bold; color:var(--danger);">0 ETB</div>
+                    </div>
+                    <div style="background:var(--secondary); padding:10px; border-radius:8px; text-align:center;">
+                        <div style="font-size:0.8em; color:var(--text-muted);">Net Balance</div>
+                        <div id="admStatNetBal" style="font-size:1.2em; font-weight:bold; color:var(--primary);">0 ETB</div>
                     </div>
                 </div>
             </div>
@@ -1753,16 +1767,22 @@
         // --- ADMIN LOGIC ---
         function loadAdminData() {
             db.ref('users').on('value', snap => {
-                let totalU = 0; let activeU = 0; let totalInv = 0;
+                let totalU = 0; let activeU = 0; let totalInv = 0; let totalWith = 0;
                 snap.forEach(c => {
                     totalU++;
                     let dep = (c.val().totalDep || 0);
+                    let withAmt = (c.val().totalWith || 0);
                     totalInv += dep;
+                    totalWith += withAmt;
                     if (dep > 0) activeU++;
                 });
                 document.getElementById('admStatUsers').innerText = totalU;
                 document.getElementById('admStatActiveUsers').innerText = activeU;
                 document.getElementById('admStatInvest').innerText = totalInv + " ETB";
+                
+                if(document.getElementById('admStatTotalDep')) document.getElementById('admStatTotalDep').innerText = totalInv + " ETB";
+                if(document.getElementById('admStatTotalWith')) document.getElementById('admStatTotalWith').innerText = totalWith + " ETB";
+                if(document.getElementById('admStatNetBal')) document.getElementById('admStatNetBal').innerText = (totalInv - totalWith) + " ETB";
             });
 
             db.ref('settings/support').on('value', snap => {
