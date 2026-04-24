@@ -772,7 +772,7 @@
                 </div>
 
                 <div style="display:grid; gap:15px;">
-                    <div style="background:var(--surface); border:1px solid var(--border); padding:20px; border-radius:16px; display:flex; align-items:center; gap:15px; cursor:pointer; box-shadow:var(--shadow); transition:transform 0.3s;" onclick="window.open('https://t.me/+dhT-OEP10zIyN2Jk', '_blank')">
+                    <div style="background:var(--surface); border:1px solid var(--border); padding:20px; border-radius:16px; display:flex; align-items:center; gap:15px; cursor:pointer; box-shadow:var(--shadow); transition:transform 0.3s;" onclick="openSupport('channel')">
                         <div style="width:50px; height:50px; background:rgba(0,136,204,0.1); color:#0088cc; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.8em;">
                             <i class="fas fa-bullhorn"></i>
                         </div>
@@ -783,7 +783,7 @@
                         <i class="fas fa-chevron-right" style="color:#cbd5e1;"></i>
                     </div>
 
-                    <div style="background:var(--surface); border:1px solid var(--border); padding:20px; border-radius:16px; display:flex; align-items:center; gap:15px; cursor:pointer; box-shadow:var(--shadow); transition:transform 0.3s;" onclick="window.open('https://t.me/+xZdsC4pmUapkZDY0', '_blank')">
+                    <div style="background:var(--surface); border:1px solid var(--border); padding:20px; border-radius:16px; display:flex; align-items:center; gap:15px; cursor:pointer; box-shadow:var(--shadow); transition:transform 0.3s;" onclick="openSupport('group')">
                         <div style="width:50px; height:50px; background:rgba(16,185,129,0.1); color:var(--success); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.8em;">
                             <i class="fas fa-users"></i>
                         </div>
@@ -1125,6 +1125,8 @@
                     let sc = snap.val();
                     // Override with dynamic configs if available, otherwise fallback
                     if (sc.cs) supportConfig.cs = sc.cs;
+                    if (sc.channel) supportConfig.channel = sc.channel;
+                    if (sc.group) supportConfig.group = sc.group;
                 }
             });
 
