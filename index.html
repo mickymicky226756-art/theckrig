@@ -66,6 +66,2192 @@
             top: 0 !important; /* Prevents Google Translate body shift */
         }
 
+        /* --- Hide Google Translate default elements completely to prevent garbled text --- */
+        .skiptranslate, #google_translate_element, .goog-te-banner-frame,
+        .goog-te-gadget, .goog-te-menu-frame, #goog-gt-tt, .goog-te-balloon-frame { 
+            display: none !important; 
+            visibility: hidden !important; 
+        }
+        .goog-text-highlight { 
+            background: none !important; 
+            box-shadow: none !important; 
+            border: none !important; 
+            pointer-events: none !important; 
+        }
+
+        .hidden { display: none !important; }
+        h1, h2, h3, h4 { margin: 0; font-weight: 700; color: var(--text-dark); }
+        
+        /* --- AUTHENTICATION SCREEN --- */
+        #authSection {
+            min-height: 100vh; display: flex; flex-direction: column; 
+            justify-content: center; align-items: center; padding: 30px;
+            background: transparent;
+        }
+        
+        .auth-card {
+            background: transparent;
+            padding: 0; 
+            border-radius: 0;
+            width: 100%; max-width: 550px;
+            box-shadow: none;
+            text-align: center;
+        }
+
+        .modern-input {
+            width: 100%; background: var(--secondary);
+            border: 1px solid var(--border); color: var(--text-dark);
+            padding: 16px; margin-bottom: 16px;
+            border-radius: 12px; font-family: 'Inter', sans-serif;
+            font-size: 1em; transition: all 0.2s;
+        }
+        .modern-input:focus { border-color: var(--primary); background: #fff; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); }
+
+        .btn-primary {
+            width: 100%; padding: 16px; background: var(--primary);
+            color: white; border: none; border-radius: 12px;
+            font-family: 'Inter', sans-serif; font-weight: 600; font-size: 1em;
+            cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);
+        }
+        .btn-primary:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 6px 12px rgba(37, 99, 235, 0.3); }
+        
+        .switch-link { margin-top: 20px; font-size: 0.9em; color: var(--primary); cursor: pointer; font-weight: 600; }
+
+        /* --- APP CONTAINER --- */
+        /* Fixed scrolling bug by removing backdrop-filter which disables position:fixed */
+        .app-container { max-width: 550px; margin: 0 auto; padding-bottom: 90px; min-height: 100vh; display: none; background: rgba(255, 255, 255, 0.95); box-shadow: var(--shadow-lg); position: relative;}
+
+        .top-bar {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px; background: var(--surface);
+            position: sticky; top: 0; z-index: 100;
+            border-bottom: 1px solid var(--border);
+        }
+        .brand { font-size: 1.3em; font-weight: 800; color: var(--text-dark); display: flex; align-items: center; gap: 8px; width:100%; justify-content:center;}
+        
+        .balance-card {
+            margin: 20px; padding: 25px;
+            background: linear-gradient(135deg, var(--primary) 0%, #4338ca 100%);
+            border-radius: var(--radius); color: white;
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2);
+            position: relative; overflow: hidden;
+        }
+        .balance-card::after {
+            content: '\f108'; font-family: 'Font Awesome 6 Free'; font-weight: 900;
+            position: absolute; right: -20px; bottom: -20px; font-size: 120px;
+            opacity: 0.1; transform: rotate(-15deg);
+        }
+        .balance-label { font-size: 0.9em; opacity: 0.9; margin-bottom: 5px; font-weight: 500; }
+        .balance-val { font-size: 2.5em; font-weight: 800; }
+        .balance-sub { margin-top: 15px; font-size: 0.9em; background: rgba(255,255,255,0.2); display: inline-block; padding: 5px 12px; border-radius: 20px; }
+
+        .action-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; padding: 0 15px; margin-bottom: 20px; }
+        .action-item {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            background: var(--surface); padding: 12px 2px; border-radius: 12px;
+            cursor: pointer; border: 1px solid var(--border); transition: 0.2s;
+        }
+        .action-item:hover { background: var(--secondary); transform: translateY(-3px); }
+        .action-item i { font-size: 1.3em; margin-bottom: 6px; color: var(--primary); }
+        .action-item span { font-size: 0.65em; font-weight: 700; color: var(--text-dark); text-align: center; }
+
+        .ticker-wrap {
+            margin: 0 20px 20px; background: var(--secondary); border-radius: 12px;
+            padding: 12px; overflow: hidden; white-space: nowrap; border: 1px solid var(--border);
+        }
+        .ticker-move { display: inline-block; animation: ticker 20s linear infinite; padding-left: 100%; }
+        .ticker-item { margin-right: 30px; font-size: 0.85em; font-weight: 500; color: var(--text-dark); display: inline-flex; align-items: center; gap: 5px; }
+        .ticker-item span { color: var(--success); font-weight: 700; }
+        @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
+
+        .section-title { padding: 0 20px; margin: 25px 0 15px; font-size: 1.2em; display: flex; justify-content: space-between; align-items: center; }
+        
+        .intro-pc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 0 20px; margin-bottom: 25px; }
+        .intro-pc-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); }
+        .intro-pc-card img { width: 100%; height: 110px; object-fit: cover; }
+        .intro-pc-info { padding: 10px; }
+        .intro-pc-info h4 { font-size: 0.9em; margin-bottom: 3px; color: var(--text-dark); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .intro-pc-info p { font-size: 0.75em; color: var(--text-muted); margin: 0; }
+
+        .pc-card {
+            background: linear-gradient(145deg, var(--surface), #f8fafc);
+            margin: 0 20px 20px;
+            border-radius: 20px;
+            border: 1px solid rgba(37, 99, 235, 0.1);
+            overflow: hidden;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            display: flex; flex-direction: column;
+        }
+        .pc-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(37, 99, 235, 0.15);
+            border-color: rgba(37, 99, 235, 0.3);
+        }
+        .pc-header-img {
+            width: 100%; height: 170px;
+            position: relative;
+            overflow: hidden;
+            background: #e2e8f0;
+        }
+        .pc-header-img img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        .pc-card:hover .pc-header-img img { transform: scale(1.08); }
+        
+        .pc-badge-modern {
+            position: absolute; top: 15px; right: 15px;
+            background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(8px);
+            color: white; padding: 6px 14px; border-radius: 20px;
+            font-size: 0.75em; font-weight: 700; letter-spacing: 0.5px;
+            display: flex; align-items: center; gap: 6px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        
+        .pc-body { padding: 20px; }
+        .pc-title { font-size: 1.25em; font-weight: 800; color: var(--text-dark); margin-bottom: 15px; letter-spacing: -0.5px;}
+        
+        .pc-stats-modern {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+            margin-bottom: 20px;
+        }
+        .pc-stat-box {
+            background: rgba(37, 99, 235, 0.04);
+            padding: 12px 15px; border-radius: 12px;
+            display: flex; flex-direction: column; justify-content: center;
+            border: 1px solid rgba(37, 99, 235, 0.08);
+        }
+        .pc-stat-label { font-size: 0.7em; color: var(--text-muted); font-weight: 700; text-transform: uppercase; margin-bottom: 5px; letter-spacing: 0.5px;}
+        .pc-stat-value { font-size: 1.15em; font-weight: 800; color: var(--primary); }
+        
+        .pc-footer {
+            display: flex; justify-content: space-between; align-items: center;
+            padding-top: 15px; border-top: 1px dashed var(--border);
+        }
+        .pc-price-wrap { display: flex; flex-direction: column; }
+        .pc-price-label { font-size: 0.75em; color: var(--text-muted); font-weight: 600;}
+        .pc-price-val { font-size: 1.4em; font-weight: 900; color: var(--text-dark); }
+        
+        .btn-buy-modern {
+            background: linear-gradient(135deg, var(--primary), #4338ca);
+            color: white; padding: 12px 24px; border-radius: 12px;
+            font-weight: 700; font-size: 0.95em; border: none; cursor: pointer;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3); transition: 0.3s;
+        }
+        .btn-buy-modern:hover {
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4); transform: translateY(-2px);
+        }
+        .btn-sold-modern {
+            background: var(--border); color: var(--text-muted);
+            padding: 12px 24px; border-radius: 12px; font-weight: 700; font-size: 0.95em;
+            border: none; cursor: not-allowed;
+        }
+
+        .btn-sm { padding: 10px 20px; border-radius: 8px; border: none; font-weight: 600; cursor: pointer; transition: 0.2s; }
+
+        /* Navigation */
+        .bottom-nav {
+            position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
+            width: 100%; max-width: 550px; background: var(--surface);
+            border-top: 1px solid var(--border); display: flex;
+            justify-content: space-around; padding: 10px 0; padding-bottom: calc(10px + env(safe-area-inset-bottom));
+            z-index: 1000;
+        }
+        .nav-link {
+            display: flex; flex-direction: column; align-items: center; gap: 4px;
+            color: var(--text-muted); font-size: 0.75em; font-weight: 600; cursor: pointer; transition: 0.3s;
+            flex: 1; text-align: center;
+        }
+        .nav-link i { font-size: 1.4em; padding: 8px; border-radius: 12px; transition: 0.3s; }
+        .nav-link.active { color: var(--primary); }
+        .nav-link.active i { background: rgba(37, 99, 235, 0.1); color: var(--primary); }
+
+        /* Floating Support Button */
+        .floating-support {
+            position: fixed;
+            bottom: 85px; 
+            right: 20px;
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, var(--primary), #4338ca);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6em;
+            box-shadow: 0 6px 15px rgba(37, 99, 235, 0.4);
+            cursor: pointer;
+            z-index: 999;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .floating-support:hover {
+            transform: scale(1.1) rotate(10deg);
+        }
+
+        /* Overlays & Modals */
+        .overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px);
+            z-index: 2000; display: none; overflow-y: auto; padding: 20px;
+        }
+        
+        .close-btn { position: absolute; top: 15px; right: 20px; font-size: 1.5em; color: var(--text-muted); cursor: pointer; z-index: 100;}
+        
+        /* Profile & Settings */
+        .profile-header { text-align: center; padding: 30px 20px; background: var(--surface); border-bottom: 1px solid var(--border); }
+        .avatar { width: 90px; height: 90px; background: var(--secondary); border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 2.5em; color: var(--primary); border: 3px solid #fff; box-shadow: var(--shadow); }
+
+        /* Modern Menu Styles for Profile Page */
+        .modern-menu-group {
+            background: var(--surface);
+            border-radius: 16px;
+            margin: 0 20px 20px;
+            padding: 5px 0;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+        .modern-menu-item {
+            display: flex;
+            align-items: center;
+            padding: 16px 20px;
+            cursor: pointer;
+            transition: background 0.2s;
+            color: var(--text-dark);
+        }
+        .modern-menu-item:not(:last-child) {
+            border-bottom: 1px solid var(--secondary);
+        }
+        .modern-menu-item:hover {
+            background: var(--secondary);
+        }
+        .modern-menu-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 1.1em;
+        }
+        .modern-menu-item span {
+            flex-grow: 1;
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+        .modern-menu-item .arr {
+            color: #cbd5e1;
+            font-size: 0.9em;
+        }
+
+        .list-btn { display: flex; align-items: center; padding: 16px 20px; border-bottom: 1px solid var(--border); background: var(--surface); cursor: pointer; transition: 0.2s; }
+        .list-btn:hover { background: var(--secondary); }
+        .list-btn i { font-size: 1.2em; width: 30px; color: var(--text-muted); }
+        .list-btn span { flex-grow: 1; font-weight: 500; color: var(--text-dark); }
+        .list-btn .arr { color: var(--border); }
+
+        #toast {
+            position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+            background: var(--text-dark); color: white; padding: 12px 24px;
+            border-radius: 30px; font-weight: 500; z-index: 5000; opacity: 0;
+            transition: 0.3s; pointer-events: none; box-shadow: var(--shadow-lg);
+        }
+        #toast.show { opacity: 1; top: 40px; }
+
+        /* Admin Box */
+        .admin-box { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 15px; margin-bottom: 15px; }
+        .admin-box h4 { border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-bottom: 10px; }
+        .plan-item-admin { display:flex; justify-content:space-between; align-items:center; background:var(--secondary); padding:10px; margin-bottom:5px; border-radius:8px; font-size:0.9em; border:1px solid var(--border); }
+        .btn-adm-edit { background: var(--primary); color:white; border:none; padding:5px 10px; cursor:pointer; font-weight:bold; border-radius:6px; }
+        .btn-adm-del { background: var(--danger); color:white; border:none; padding:5px 10px; cursor:pointer; font-weight:bold; border-radius:6px; }
+        .btn-adm-approve { background: var(--success); color:white; border:none; padding:5px 10px; cursor:pointer; font-weight:bold; margin-right: 5px; border-radius:6px; }
+        
+        .status-badge { padding: 4px 8px; border-radius: 6px; font-size: 0.75em; font-weight: bold; }
+        .status-pending { background: #fef3c7; color: #d97706; }
+        .status-paid { background: #d1fae5; color: #059669; }
+        .status-rejected { background: #fee2e2; color: #dc2626; }
+        
+        .page-header { padding: 20px; background: var(--surface); display: flex; align-items: center; gap: 15px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 10; }
+        .page-header i { font-size: 1.2em; cursor: pointer; color: var(--text-dark); padding: 5px; transition: 0.2s;}
+        .page-header i:hover { color: var(--primary); }
+        .page-header h3 { margin: 0; font-size: 1.1em; }
+        
+        .about-section { padding: 20px; line-height: 1.6; color: var(--text-dark); }
+        .about-section h4 { color: var(--primary); margin-top: 20px; margin-bottom: 10px; font-size: 1.1em; }
+        .about-section p { font-size: 0.95em; margin-bottom: 15px; color: var(--text-muted); }
+        .about-section ul { padding-left: 20px; margin-bottom: 15px; color: var(--text-muted); font-size: 0.95em; }
+        .about-section li { margin-bottom: 8px; }
+
+        /* --- MODERN HISTORY TABS & LIST --- */
+        .history-tabs { display: flex; background: var(--secondary); padding: 5px; border-radius: 12px; margin-bottom: 20px; border: 1px solid var(--border); }
+        .hist-tab { flex: 1; text-align: center; padding: 10px; font-size: 0.9em; font-weight: 600; color: var(--text-muted); cursor: pointer; border-radius: 8px; transition: 0.3s; }
+        .hist-tab.active { background: var(--surface); color: var(--primary); box-shadow: var(--shadow); }
+        
+        .hist-item { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 15px; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; box-shadow: var(--shadow); transition: transform 0.2s;}
+        .hist-item:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+        .hist-icon-box { width: 45px; height: 45px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.2em; margin-right: 15px; flex-shrink: 0;}
+        .hist-icon-dep { background: rgba(16, 185, 129, 0.1); color: var(--success); }
+        .hist-icon-with { background: rgba(239, 68, 68, 0.1); color: var(--danger); }
+        .hist-details { flex-grow: 1; display:flex; flex-direction:column; gap:4px; overflow: hidden; }
+        .hist-title { font-weight: 700; color: var(--text-dark); font-size: 1.05em; }
+        .hist-date { font-size: 0.75em; color: var(--text-muted); }
+        .hist-amount-box { text-align: right; display:flex; flex-direction:column; align-items: flex-end; gap:4px; }
+        .hist-amount.dep { color: var(--success); font-weight: 800; font-size: 1.1em;}
+        .hist-amount.with { color: var(--text-dark); font-weight: 800; font-size: 1.1em;}
+        .hist-badge { padding: 4px 10px; border-radius: 8px; font-size: 0.7em; font-weight: 700; letter-spacing: 0.5px;}
+
+    </style>
+</head>
+<body>
+
+    <div id="google_translate_element"></div>
+
+    <div id="toast">Notification Message</div>
+
+    <div id="authSection">
+        <div class="auth-card">
+            <h1 class="modern-login-title">TechRig PC</h1>
+            <p style="color:var(--text-muted); font-size:0.9em; margin-bottom:25px; margin-top:5px;">Invest in High-Performance Computers</p>
+            
+            <form id="authForm">
+                <input type="number" id="authPhone" class="modern-input" placeholder="Phone Number" required>
+                <input type="password" id="authPass" class="modern-input" placeholder="Password" required>
+                <input type="password" id="authConf" class="modern-input" placeholder="Confirm Password" style="display:none;">
+                <input type="text" id="authRef" class="modern-input" placeholder="Referral Code (Optional)" style="display:none;">
+
+                <button type="submit" class="btn-primary" id="authBtn">Secure Login</button>
+            </form>
+            
+            <div class="switch-link" onclick="toggleAuth()"><span id="switchTxt">Create new account</span></div>
+        </div>
+    </div>
+
+    <div id="appContainer" class="app-container">
+        
+        <div class="floating-support" onclick="switchPage('pageSupport', document.querySelectorAll('.nav-link')[4])">
+            <i class="fas fa-headset"></i>
+        </div>
+
+        <div class="top-bar">
+            <div class="brand"><i class="fas fa-desktop" style="color:var(--primary)"></i> TechRig</div>
+        </div>
+
+        <div id="pageHome" class="page-section">
+            <div class="balance-card">
+                <div class="balance-label">Total Portfolio Value</div>
+                <div class="balance-val"><span id="userBal">0.00</span> <span style="font-size:0.5em; opacity:0.8;">ETB</span></div>
+                <div class="balance-sub"><i class="fas fa-arrow-trend-up"></i> Today's Profit: <span id="dailyRev" style="font-weight:bold;">0.00</span> ETB</div>
+            </div>
+
+            <div class="action-grid">
+                <div class="action-item" onclick="switchPage('pageDeposit', document.querySelectorAll('.nav-link')[0])">
+                    <i class="fas fa-wallet"></i><span>Deposit</span>
+                </div>
+                <div class="action-item" onclick="goToWithdraw()">
+                    <i class="fas fa-money-bill-transfer"></i><span>Withdraw</span>
+                </div>
+                <div class="action-item" onclick="switchPage('pageCheckIn', document.querySelectorAll('.nav-link')[0])">
+                    <i class="fas fa-calendar-check" style="color:var(--warning)"></i><span>Check-in</span>
+                </div>
+                <div class="action-item" onclick="switchPage('pageGift', document.querySelectorAll('.nav-link')[0])">
+                    <i class="fas fa-gift" style="color:#8b5cf6"></i><span>Promo</span>
+                </div>
+                <div class="action-item" onclick="openTaskPage()">
+                    <i class="fas fa-tasks" style="color:#f43f5e"></i><span>Task</span>
+                </div>
+            </div>
+
+            <div class="ticker-wrap">
+                <div class="ticker-move" id="withdrawTicker">
+                    <span style="color:var(--text-muted);">Syncing payout records...</span>
+                </div>
+            </div>
+
+            <div class="section-title">
+                <h3>Hardware Overview</h3>
+                <span style="font-size:0.8em; color:var(--primary); cursor:pointer;" onclick="switchPage('pageInvest', document.querySelectorAll('.nav-link')[1])">Go to Store</span>
+            </div>
+            
+            <div class="intro-pc-grid">
+                <div class="intro-pc-card">
+                    <img src="https://images.unsplash.com/photo-1587831990711-23ca6441447b?q=80&w=500&auto=format&fit=crop" alt="PC 1">
+                    <div class="intro-pc-info">
+                        <h4>RTX 4090 Build</h4>
+                        <p>Enterprise Server</p>
+                    </div>
+                </div>
+                <div class="intro-pc-card">
+                    <img src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?q=80&w=500&auto=format&fit=crop" alt="PC 2">
+                    <div class="intro-pc-info">
+                        <h4>AMD Threadripper</h4>
+                        <p>Cloud Station</p>
+                    </div>
+                </div>
+                <div class="intro-pc-card">
+                    <img src="https://images.unsplash.com/photo-1541807084-5c52b6b3adef?q=80&w=500&auto=format&fit=crop" alt="PC 3">
+                    <div class="intro-pc-info">
+                        <h4>Quantum Node</h4>
+                        <p>AI Processing</p>
+                    </div>
+                </div>
+                <div class="intro-pc-card">
+                    <img src="https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?q=80&w=500&auto=format&fit=crop" alt="PC 4">
+                    <div class="intro-pc-info">
+                        <h4>Liquid Cooled Rig</h4>
+                        <p>Extreme Mining</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="pageDeposit" class="page-section hidden">
+            <div class="page-header">
+                <i class="fas fa-arrow-left" onclick="switchPage('pageHome', document.querySelectorAll('.nav-link')[0])"></i>
+                <h3>Fund Account</h3>
+            </div>
+            <div style="padding: 20px;">
+                <div id="depositMethodButtons" style="display:flex; gap:10px; margin-bottom:20px; flex-wrap:wrap;"></div>
+                
+                <div id="bankDetails" style="display:none; background:var(--secondary); padding:15px; border-radius:12px;">
+                    <p style="font-size:0.9em; color:var(--text-muted); margin-bottom:5px;">Transfer To:</p>
+                    <h4 id="depBankName" style="color:var(--primary);">Bank Name</h4>
+                    <h2 id="depAccNum" style="letter-spacing:1px; margin:5px 0;">000000</h2>
+                    <p id="depHolder" style="font-weight:bold;">Account Holder</p>
+                    
+                    <hr style="border:none; border-top:1px solid var(--border); margin:15px 0;">
+                    
+                    <input type="number" id="depAmount" class="modern-input" placeholder="Amount (Min 1200 ETB)" style="background:white;">
+                    <input type="text" id="depRef" class="modern-input" placeholder="Transaction Reference ID" style="background:white;">
+                    <button class="btn-primary" onclick="submitDeposit()">Submit Deposit</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="pageWithdraw" class="page-section hidden">
+            <div class="page-header">
+                <i class="fas fa-arrow-left" onclick="switchPage('pageHome', document.querySelectorAll('.nav-link')[0])"></i>
+                <h3>Withdraw Funds</h3>
+            </div>
+            <div style="padding: 20px;">
+                <div style="background:var(--secondary); padding: 20px; border-radius: 12px; margin-bottom: 20px; text-align: center; border: 1px solid var(--border);">
+                    <p style="color:var(--text-muted); font-size:0.9em; margin-bottom:5px;">Available Balance</p>
+                    <strong id="withBal" style="color:var(--text-dark); font-size: 2em;">0.00</strong> <span style="font-size:0.9em; color:var(--text-muted);">ETB</span>
+                </div>
+                <input type="number" id="withAmount" class="modern-input" placeholder="Amount (Min 300 ETB, 15% Fee)">
+                <input type="password" id="withPass" class="modern-input" placeholder="Login Password to confirm">
+                <button class="btn-primary" onclick="submitWithdraw()">Request Payout</button>
+            </div>
+        </div>
+
+        <div id="pageCheckIn" class="page-section hidden">
+            <div class="page-header">
+                <i class="fas fa-arrow-left" onclick="switchPage('pageHome', document.querySelectorAll('.nav-link')[0])"></i>
+                <h3>Daily Check-in</h3>
+            </div>
+            <div style="padding: 40px 20px; text-align: center;">
+                <i class="fas fa-calendar-check" style="font-size: 5em; color: var(--warning); margin-bottom: 20px; text-shadow: 0 4px 10px rgba(245, 158, 11, 0.3);"></i>
+                <h2 style="margin-bottom: 10px;">Daily Reward</h2>
+                <p style="color: var(--text-muted); margin-bottom: 30px;">Claim your daily bonus of 5 ETB every day just by logging in!</p>
+                <button class="btn-primary" onclick="dailyCheckIn()" style="background: var(--warning); color: #fff; font-weight: bold; font-size: 1.1em; padding: 18px; box-shadow: 0 5px 15px rgba(245, 158, 11, 0.4);">Claim 5 ETB Now</button>
+            </div>
+        </div>
+        
+        <div id="pageTask" class="page-section hidden">
+            <div class="page-header">
+                <i class="fas fa-arrow-left" onclick="switchPage('pageHome', document.querySelectorAll('.nav-link')[0])"></i>
+                <h3>Invitation Tasks</h3>
+            </div>
+            <div style="padding: 20px;">
+                <div style="background:var(--secondary); padding: 20px; border-radius: 12px; margin-bottom: 20px; text-align: center; border:1px solid var(--border);">
+                    <i class="fas fa-users" style="font-size:2em; color:var(--primary); margin-bottom:10px;"></i>
+                    <h4 style="color:var(--text-dark); margin-bottom:5px;">Your Valid Invites: <span id="taskInviteCount" style="color:var(--primary); font-size:1.3em;">0</span></h4>
+                    <p style="font-size:0.85em; color:var(--text-muted); margin-top:5px;">Invite friends and claim massive rewards when you reach the milestones below!</p>
+                </div>
+                <div id="taskListContent">
+                    <p style="text-align:center;">Loading tasks...</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="pageMyRigs" class="page-section hidden">
+            <div class="page-header">
+                <i class="fas fa-arrow-left" onclick="switchPage('pageHome', document.querySelectorAll('.nav-link')[0])"></i>
+                <h3>My PC Fleet</h3>
+            </div>
+            <div style="padding: 20px;" id="myActiveRigsList"></div>
+        </div>
+
+        <div id="pageInvest" class="page-section hidden">
+            <div style="background:var(--primary); color:white; padding:30px 20px; text-align:center;">
+                <h2 style="color:white; margin-bottom:5px;">Hardware Store</h2>
+                <p style="opacity:0.8; font-size:0.9em; margin:0;">Rent High-End PCs & Earn Daily Profits</p>
+            </div>
+            <div style="padding-top:20px;" id="plansList"></div>
+        </div>
+
+        <div id="pageTeam" class="page-section hidden">
+            <div style="background:var(--primary); color:white; padding:30px 20px; text-align:center; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; box-shadow: var(--shadow-lg);">
+                <h2 style="color:white; margin-bottom:10px;">My Team</h2>
+                <div style="font-size:2em; font-weight:800;"><span id="teamBal">0.00</span> <span style="font-size:0.5em; opacity: 0.8;">ETB</span></div>
+                <div style="font-size:0.9em; opacity:0.8; margin-bottom: 25px;">Total Commission</div>
+                
+                <div style="background: rgba(255,255,255,0.15); padding: 15px 20px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; border: 1px solid rgba(255,255,255,0.3);">
+                    <div style="text-align: left;">
+                        <div style="font-size: 0.75em; opacity: 0.9; text-transform: uppercase; letter-spacing: 1px;">Invitation Code</div>
+                        <div id="inviteCodeDisplay" style="font-size: 1.4em; font-weight: bold; letter-spacing: 2px;">------</div>
+                    </div>
+                    <button class="btn-sm" style="background: white; color: var(--primary); font-weight: 800; border-radius: 8px;" onclick="copyRef()">
+                        <i class="fas fa-copy"></i> Copy Link
+                    </button>
+                </div>
+            </div>
+
+            <div style="padding: 20px;">
+                <div style="background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:15px; margin-bottom:20px; box-shadow: var(--shadow);">
+                    <h4 style="margin-bottom: 12px; border-bottom: 1px solid var(--border); padding-bottom: 8px; color: var(--text-dark); display: flex; align-items: center; gap: 8px;">
+                        <i class="fas fa-percent" style="color: var(--warning);"></i> Commission Rules (1st Investment Only)
+                    </h4>
+                    <div style="display: flex; justify-content: space-between; text-align: center; margin-top: 10px;">
+                        <div style="flex: 1; border-right: 1px solid var(--border);">
+                            <div style="color:var(--text-dark); font-weight:bold; font-size:1.1em;">Level 1</div>
+                            <div style="font-size:1.3em; color:var(--success); font-weight: 900; margin-top: 5px;">25%</div>
+                        </div>
+                        <div style="flex: 1; border-right: 1px solid var(--border);">
+                            <div style="color:var(--text-dark); font-weight:bold; font-size:1.1em;">Level 2</div>
+                            <div style="font-size:1.3em; color:var(--success); font-weight: 900; margin-top: 5px;">8%</div>
+                        </div>
+                        <div style="flex: 1;">
+                            <div style="color:var(--text-dark); font-weight:bold; font-size:1.1em;">Level 3</div>
+                            <div style="font-size:1.3em; color:var(--success); font-weight: 900; margin-top: 5px;">5%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px;">
+                    <div style="background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:15px; text-align:center; box-shadow: var(--shadow);">
+                        <i class="fas fa-users" style="color: var(--primary); font-size: 1.5em; margin-bottom: 10px;"></i>
+                        <div style="font-size:0.8em; color:var(--text-muted); font-weight: 600;">Total Members</div>
+                        <div style="font-size:1.6em; font-weight:900; color:var(--text-dark);" id="totalMembersStat">0</div>
+                    </div>
+                    <div style="background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:15px; text-align:center; box-shadow: var(--shadow);">
+                        <i class="fas fa-user-check" style="color: var(--success); font-size: 1.5em; margin-bottom: 10px;"></i>
+                        <div style="font-size:0.8em; color:var(--text-muted); font-weight: 600;">Active Investors</div>
+                        <div style="font-size:1.6em; font-weight:900; color:var(--success);" id="activeMembersStat">0</div>
+                    </div>
+                </div>
+
+                <div style="display:flex; background:var(--secondary); border-radius:12px; padding:6px; margin-bottom:15px; border: 1px solid var(--border);">
+                    <button id="tabL1" class="btn-sm" style="flex:1; background:var(--surface); box-shadow:var(--shadow); color: var(--text-dark);" onclick="loadTeam(1)">Lv 1 (<span id="countL1">0</span>)</button>
+                    <button id="tabL2" class="btn-sm" style="flex:1; background:transparent; color:var(--text-muted);" onclick="loadTeam(2)">Lv 2 (<span id="countL2">0</span>)</button>
+                    <button id="tabL3" class="btn-sm" style="flex:1; background:transparent; color:var(--text-muted);" onclick="loadTeam(3)">Lv 3 (<span id="countL3">0</span>)</button>
+                </div>
+                
+                <div style="font-size:0.85em; color:var(--text-muted); margin-bottom: 15px; text-align: right; background: var(--secondary); padding: 8px 15px; border-radius: 8px;">
+                    Active investors in this level: <strong style="color:var(--success); font-size: 1.2em;" id="activeLevelCount">0</strong>
+                </div>
+
+                <div id="teamList"></div>
+            </div>
+        </div>
+
+        <div id="pageMe" class="page-section hidden">
+            <div class="profile-header">
+                <div class="avatar"><i class="fas fa-user-tie"></i></div>
+                <h3 id="uLevelTitle">Investor Level 0</h3>
+                <p id="uPhoneDisplay" style="font-weight:bold; color:var(--primary); margin-top:5px; font-size:1.1em;"></p>
+                <p style="color:var(--text-muted); font-size:0.9em; margin-top:2px;">Hardware Fleet Manager</p>
+            </div>
+
+            <div style="margin-top:20px;">
+                <div class="modern-menu-group">
+                    <div class="modern-menu-item" onclick="switchPage('pageBank', document.querySelectorAll('.nav-link')[4])">
+                        <div class="modern-menu-icon" style="background: rgba(37, 99, 235, 0.1); color: var(--primary);"><i class="fas fa-building-columns"></i></div>
+                        <span>Link Bank Account</span><i class="fas fa-chevron-right arr"></i>
+                    </div>
+                    <div class="modern-menu-item" onclick="openHistoryFull()">
+                        <div class="modern-menu-icon" style="background: rgba(16, 185, 129, 0.1); color: var(--success);"><i class="fas fa-file-invoice-dollar"></i></div>
+                        <span>Transaction History</span><i class="fas fa-chevron-right arr"></i>
+                    </div>
+                    <div class="modern-menu-item" onclick="switchPage('pagePassword', document.querySelectorAll('.nav-link')[4])">
+                        <div class="modern-menu-icon" style="background: rgba(245, 158, 11, 0.1); color: var(--warning);"><i class="fas fa-lock"></i></div>
+                        <span>Change Password</span><i class="fas fa-chevron-right arr"></i>
+                    </div>
+                    <div class="modern-menu-item" onclick="switchPage('pageLanguage', document.querySelectorAll('.nav-link')[4])">
+                        <div class="modern-menu-icon" style="background: rgba(139, 92, 246, 0.1); color: #8b5cf6;"><i class="fas fa-globe"></i></div>
+                        <span>Change Language</span><i class="fas fa-chevron-right arr"></i>
+                    </div>
+                </div>
+
+                <div class="modern-menu-group">
+                    <div class="modern-menu-item" onclick="downloadApp()">
+                        <div class="modern-menu-icon" style="background: rgba(16, 185, 129, 0.1); color: var(--success);"><i class="fas fa-download"></i></div>
+                        <span>Download App</span><i class="fas fa-chevron-right arr"></i>
+                    </div>
+                    <div class="modern-menu-item" onclick="switchPage('pageAbout', document.querySelectorAll('.nav-link')[4])">
+                        <div class="modern-menu-icon" style="background: rgba(245, 158, 11, 0.1); color: var(--warning);"><i class="fas fa-info-circle"></i></div>
+                        <span>About TechRig</span><i class="fas fa-chevron-right arr"></i>
+                    </div>
+                    <div class="modern-menu-item" onclick="switchPage('pageSupport', document.querySelectorAll('.nav-link')[4])">
+                        <div class="modern-menu-icon" style="background: rgba(0, 136, 204, 0.1); color: #0088cc;"><i class="fas fa-headset"></i></div>
+                        <span>Contact Support</span><i class="fas fa-chevron-right arr"></i>
+                    </div>
+                </div>
+
+                <div class="modern-menu-group" style="margin-bottom: 40px;">
+                    <div class="modern-menu-item" onclick="logout()" style="color: var(--danger); border-bottom: none;">
+                        <div class="modern-menu-icon" style="background: rgba(239, 68, 68, 0.1); color: var(--danger);"><i class="fas fa-arrow-right-from-bracket"></i></div>
+                        <span style="color:var(--danger);">Sign Out</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="pageBank" class="page-section hidden">
+            <div class="page-header">
+                <i class="fas fa-arrow-left" onclick="switchPage('pageMe', document.querySelectorAll('.nav-link')[4])"></i>
+                <h3>Payout Details</h3>
+            </div>
+            <div style="padding: 20px;">
+                <div style="text-align:center; margin-bottom: 25px;">
+                    <div style="width:70px; height:70px; background:rgba(37,99,235,0.1); color:var(--primary); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:2.2em; margin:0 auto 15px;">
+                        <i class="fas fa-building-columns"></i>
+                    </div>
+                    <h2 style="color:var(--text-dark); margin-bottom:5px;">Payout Method</h2>
+                    <p style="color:var(--text-muted); font-size:0.9em;">Link your bank or wallet to receive profits</p>
+                </div>
+
+                <div style="background:var(--surface); padding:20px; border-radius:16px; box-shadow:var(--shadow); border:1px solid var(--border);">
+                    <label style="font-size:0.85em; font-weight:bold; color:var(--text-muted); margin-bottom:8px; display:block;">Account Holder Name</label>
+                    <input type="text" id="bindName" class="modern-input" placeholder="e.g. Abebe Kebede">
+
+                    <label style="font-size:0.85em; font-weight:bold; color:var(--text-muted); margin-bottom:8px; display:block;">Account Number</label>
+                    <input type="number" id="bindNum" class="modern-input" placeholder="e.g. 1000123456789">
+
+                    <label style="font-size:0.85em; font-weight:bold; color:var(--text-muted); margin-bottom:8px; display:block;">Bank / Wallet Type</label>
+                    <select id="bindType" class="modern-input">
+                        <option value="CBE">CBE (Commercial Bank)</option>
+                        <option value="Telebirr">Telebirr</option>
+                        
+                        <option value="Abyssinia">Bank of Abyssinia</option>
+                    
+                    </select>
+
+                    <button class="btn-primary" style="margin-top:10px; font-size:1.05em; padding:18px; display:flex; align-items:center; justify-content:center; gap:10px;" onclick="saveBank()">
+                        <i class="fas fa-save"></i> Save Account Details
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="pageHistory" class="page-section hidden">
+            <div class="page-header">
+                <i class="fas fa-arrow-left" onclick="switchPage('pageMe', document.querySelectorAll('.nav-link')[4])"></i>
+                <h3>Transaction History</h3>
+            </div>
+            <div id="histContentFull" style="padding: 15px;">
+                <p style="text-align:center;">Loading...</p>
+            </div>
+        </div>
+
+        <div id="pageGift" class="page-section hidden">
+            <div class="page-header">
+                <i class="fas fa-arrow-left" onclick="switchPage('pageHome', document.querySelectorAll('.nav-link')[0])"></i>
+                <h3>Redeem Promo Code</h3>
+            </div>
+            <div style="padding: 40px 20px; text-align:center;">
+                <i class="fas fa-gift" style="font-size:4em; color:#8b5cf6; margin-bottom:20px;"></i>
+                <input type="text" id="giftCode" class="modern-input" placeholder="Enter Code Here" style="text-align:center; font-weight:bold; letter-spacing:2px;">
+                <button class="btn-primary" onclick="redeemGift()" style="background:#8b5cf6;">Claim Bonus</button>
+            </div>
+        </div>
+
+        <div id="pageSupport" class="page-section hidden">
+            <div class="page-header">
+                <i class="fas fa-arrow-left" onclick="switchPage('pageMe', document.querySelectorAll('.nav-link')[4])"></i>
+                <h3>Contact Support</h3>
+            </div>
+            <div style="padding: 20px;">
+                <div style="background: linear-gradient(135deg, var(--primary), #4338ca); border-radius: 20px; padding: 30px 20px; text-align: center; color: white; margin-bottom: 30px; box-shadow: 0 10px 20px rgba(37,99,235,0.2);">
+                    <i class="fas fa-headset" style="font-size:4em; margin-bottom:15px; text-shadow: 0 4px 10px rgba(0,0,0,0.2);"></i>
+                    <h2 style="color:white; margin-bottom:5px;">We're Here to Help</h2>
+                    <p style="opacity:0.9; font-size:0.9em; margin:0;">Join our community or contact agents 24/7</p>
+                </div>
+
+                <div style="display:grid; gap:15px;">
+                    <div style="background:var(--surface); border:1px solid var(--border); padding:20px; border-radius:16px; display:flex; align-items:center; gap:15px; cursor:pointer; box-shadow:var(--shadow); transition:transform 0.3s;" onclick="openSupport('channel')">
+                        <div style="width:50px; height:50px; background:rgba(0,136,204,0.1); color:#0088cc; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.8em;">
+                            <i class="fas fa-bullhorn"></i>
+                        </div>
+                        <div style="flex-grow:1;">
+                            <h4 style="margin:0; color:var(--text-dark); font-size:1.1em;">Official Channel</h4>
+                            <p style="margin:3px 0 0; color:var(--text-muted); font-size:0.85em;">News, updates & payment proofs</p>
+                        </div>
+                        <i class="fas fa-chevron-right" style="color:#cbd5e1;"></i>
+                    </div>
+
+                    <div style="background:var(--surface); border:1px solid var(--border); padding:20px; border-radius:16px; display:flex; align-items:center; gap:15px; cursor:pointer; box-shadow:var(--shadow); transition:transform 0.3s;" onclick="openSupport('group')">
+                        <div style="width:50px; height:50px; background:rgba(16,185,129,0.1); color:var(--success); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.8em;">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div style="flex-grow:1;">
+                            <h4 style="margin:0; color:var(--text-dark); font-size:1.1em;">Discussion Group</h4>
+                            <p style="margin:3px 0 0; color:var(--text-muted); font-size:0.85em;">Chat with other investors</p>
+                        </div>
+                        <i class="fas fa-chevron-right" style="color:#cbd5e1;"></i>
+                    </div>
+
+                    <div style="background:var(--surface); border:1px solid var(--border); padding:20px; border-radius:16px; display:flex; align-items:center; gap:15px; cursor:pointer; box-shadow:var(--shadow); transition:transform 0.3s;" onclick="openSupport('cs')">
+                        <div style="width:50px; height:50px; background:rgba(139,92,246,0.1); color:#8b5cf6; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.8em;">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <div style="flex-grow:1;">
+                            <h4 style="margin:0; color:var(--text-dark); font-size:1.1em;">Customer Service</h4>
+                            <p style="margin:3px 0 0; color:var(--text-muted); font-size:0.85em;">Private 1-on-1 assistance</p>
+                        </div>
+                        <i class="fas fa-chevron-right" style="color:#cbd5e1;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="pagePassword" class="page-section hidden">
+            <div class="page-header">
+                <i class="fas fa-arrow-left" onclick="switchPage('pageMe', document.querySelectorAll('.nav-link')[4])"></i>
+                <h3>Change Password</h3>
+            </div>
+            <div style="padding: 20px;">
+                <input type="password" id="cpOld" class="modern-input" placeholder="Current Password">
+                <input type="password" id="cpNew" class="modern-input" placeholder="New Password">
+                <button class="btn-primary" onclick="changePassword()">Update Password</button>
+            </div>
+        </div>
+
+        <div id="pageAbout" class="page-section hidden">
+            <div class="page-header">
+                <i class="fas fa-arrow-left" onclick="switchPage('pageMe', document.querySelectorAll('.nav-link')[4])"></i>
+                <h3>About TechRig</h3>
+            </div>
+            <div class="about-section">
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <div style="width: 80px; height: 80px; margin: 0 auto; background: var(--primary); border-radius: 20px; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 15px rgba(37, 99, 235, 0.3); transform: rotate(-10deg);">
+                        <i class="fas fa-desktop" style="font-size: 40px; color: white; transform: rotate(10deg);"></i>
+                    </div>
+                    <h2 style="margin-top: 15px; color: var(--text-dark);">TechRig PC Investments</h2>
+                    <p style="color: var(--text-muted); font-size: 0.9em;">The Future of Technology Investment</p>
+                </div>
+                
+                <div style="background: var(--surface); padding: 20px; border-radius: 16px; box-shadow: var(--shadow); border: 1px solid var(--border);">
+                    <h4><i class="fas fa-eye"></i> Our Vision</h4>
+                    <p>TechRig is a reliable and sustainable investment platform built on the globally growing Cloud Computing, Artificial Intelligence (AI), and Blockchain technologies. Our goal is to pave the way for anyone to easily own high-tech hardware and become profitable.</p>
+
+                    <h4><i class="fas fa-chart-line"></i> Why should you invest in TechRig?</h4>
+                    <p>Nowadays, the demand for High-End PCs has increased significantly. Large companies rent our hardware for data processing, AI training, high-end gaming servers, and mining. By investing in these machines:</p>
+                    <ul>
+                        <li>You will share in daily profits (Daily ROI)</li>
+                        <li>You can engage in the sector without requiring high technical knowledge</li>
+                        <li>We cover computer maintenance and electricity costs</li>
+                    </ul>
+
+                    <h4><i class="fas fa-shield-alt"></i> Our Long-Term Plan and Reliability</h4>
+                    <p>This is a long-term project, and our main objective is to create a reliable and continuous income for our investors by continuously expanding our server center and collaborating with major tech institutions. Our system is built transparently so you can track and withdraw your profits daily.</p>
+
+                    <h4><i class="fas fa-rocket"></i> Grow with us into the future!</h4>
+                    <p>As the world shifts towards a digital economy, the right investment choice is technology-based. By investing now, make tomorrow's technological transition the foundation of your financial freedom.</p>
+                    
+                    <button class="btn-primary" style="margin-top: 10px;" onclick="switchPage('pageInvest', document.querySelectorAll('.nav-link')[1])">Start investing right now</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="pageLanguage" class="page-section hidden">
+            <div class="page-header">
+                <i class="fas fa-arrow-left" onclick="switchPage('pageMe', document.querySelectorAll('.nav-link')[4])"></i>
+                <h3>Change Language</h3>
+            </div>
+            <div style="padding: 20px;">
+                <div class="list-btn" onclick="changeAppLanguage('en', 'English')" style="border-radius:12px; margin-bottom:10px; border:1px solid var(--border);">
+                    <i class="fas fa-globe-americas"></i><span>English</span>
+                </div>
+                <div class="list-btn" onclick="changeAppLanguage('am', 'Amharic (አማርኛ)')" style="border-radius:12px; margin-bottom:10px; border:1px solid var(--border);">
+                    <i class="fas fa-globe-africa"></i><span>Amharic (አማርኛ)</span>
+                </div>
+                <div class="list-btn" onclick="changeAppLanguage('om', 'Afaan Oromoo')" style="border-radius:12px; margin-bottom:10px; border:1px solid var(--border);">
+                    <i class="fas fa-globe-africa"></i><span>Afaan Oromoo</span>
+                </div>
+                <div class="list-btn" onclick="changeAppLanguage('ti', 'Tigrinya (ትግርኛ)')" style="border-radius:12px; margin-bottom:10px; border:1px solid var(--border);">
+                    <i class="fas fa-globe-africa"></i><span>Tigrinya (ትግርኛ)</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom-nav">
+            <div class="nav-link active" onclick="switchPage('pageHome', this)"><i class="fas fa-house"></i><span>Home</span></div>
+            <div class="nav-link" onclick="switchPage('pageInvest', this)"><i class="fas fa-store"></i><span>Store</span></div>
+            <div class="nav-link" onclick="goToMyRigsNav(this)"><i class="fas fa-microchip"></i><span>My PCs</span></div>
+            <div class="nav-link" onclick="switchPage('pageTeam', this)"><i class="fas fa-users"></i><span>Team</span></div>
+            <div class="nav-link" onclick="switchPage('pageMe', this)"><i class="fas fa-user"></i><span>Profile</span></div>
+        </div>
+    </div>
+
+    <div id="adminPanel" class="overlay" style="background:var(--bg-color);">
+        <div class="close-btn" onclick="closeOverlay('adminPanel')">&times;</div>
+        <div style="padding:20px; margin-top:50px; max-width: 600px; margin: 40px auto 100px auto;">
+            <h2 style="color:var(--danger); text-align:center; margin-bottom:20px;">MASTER CONTROL</h2>
+            
+            <div class="admin-box">
+                <h4 style="color:var(--primary);">System Overview</h4>
+                <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-bottom: 10px;">
+                    <div style="background:var(--secondary); padding:10px; border-radius:8px; text-align:center;">
+                        <div style="font-size:0.8em; color:var(--text-muted);">Total Users</div>
+                        <div id="admStatUsers" style="font-size:1.2em; font-weight:bold;">0</div>
+                    </div>
+                    <div style="background:var(--secondary); padding:10px; border-radius:8px; text-align:center;">
+                        <div style="font-size:0.8em; color:var(--text-muted);">Active Users</div>
+                        <div id="admStatActiveUsers" style="font-size:1.2em; font-weight:bold; color:var(--success);">0</div>
+                    </div>
+                    <div style="background:var(--secondary); padding:10px; border-radius:8px; text-align:center;">
+                        <div style="font-size:0.8em; color:var(--text-muted);">Total Invested</div>
+                        <div id="admStatInvest" style="font-size:1.2em; font-weight:bold; color:var(--success);">0 ETB</div>
+                    </div>
+                </div>
+                <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px;">
+                    <div style="background:var(--secondary); padding:10px; border-radius:8px; text-align:center;">
+                        <div style="font-size:0.8em; color:var(--text-muted);">Total Deposit</div>
+                        <div id="admStatTotalDep" style="font-size:1.2em; font-weight:bold; color:var(--success);">0 ETB</div>
+                    </div>
+                    <div style="background:var(--secondary); padding:10px; border-radius:8px; text-align:center;">
+                        <div style="font-size:0.8em; color:var(--text-muted);">Total Withdraw</div>
+                        <div id="admStatTotalWith" style="font-size:1.2em; font-weight:bold; color:var(--danger);">0 ETB</div>
+                    </div>
+                    <div style="background:var(--secondary); padding:10px; border-radius:8px; text-align:center;">
+                        <div style="font-size:0.8em; color:var(--text-muted);">Net Balance</div>
+                        <div id="admStatNetBal" style="font-size:1.2em; font-weight:bold; color:var(--primary);">0 ETB</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="admin-box">
+                <h4 style="color:var(--warning);">Daily Income Control</h4>
+                <p style="font-size:0.8em; color:var(--text-muted);">Release today's mining income so users can collect it.</p>
+                <button onclick="admReleaseIncome()" class="btn-primary" style="background:var(--warning); color:#000; width:100%;">Release Today's Income</button>
+                <div id="admIncomeStatus" style="margin-top:10px; font-size:0.85em; font-weight:bold; text-align:center;"></div>
+            </div>
+
+            <div class="admin-box">
+                <h4 style="color:var(--primary);">Search & Manage User</h4>
+                <div style="display:flex; gap:10px;">
+                    <input id="admSearchPhone" type="number" placeholder="Phone Number" class="modern-input" style="margin-bottom:0;">
+                    <button onclick="admSearchUser()" class="btn-primary" style="width:auto; padding:10px 20px;">Search</button>
+                </div>
+                <div id="admUserSearchResult" style="margin-top:15px; font-size:0.9em; border-top:1px solid var(--border); padding-top:10px;"></div>
+            </div>
+
+            <div class="admin-box">
+                <h4 style="color:var(--primary);">Manage Support Links</h4>
+                <p style="font-size:0.8em; color:var(--text-muted);">Update the Telegram links shown to users in the Support section.</p>
+                <input id="admLinkChannel" placeholder="Telegram Channel Link" class="modern-input">
+                <input id="admLinkGroup" placeholder="Telegram Group Link" class="modern-input">
+                <input id="admLinkCS" placeholder="Customer Service Link" class="modern-input">
+                <button onclick="admSaveSupportLinks()" class="btn-primary" style="width:100%;">Save Links</button>
+            </div>
+
+            <div class="admin-box">
+                <h4 style="color:var(--danger);">Pending Withdrawals</h4>
+                <div id="admWithList"></div>
+            </div>
+
+            <div class="admin-box">
+                <h4 style="color:var(--success);">Pending Deposits</h4>
+                <div id="admDepList"></div>
+            </div>
+
+            <div class="admin-box">
+                <h4 style="color:var(--danger);">Gift Code Generator</h4>
+                <input id="admGiftAmt" placeholder="Amount (ETB)" class="modern-input" type="number">
+                <button onclick="admGenGift()" class="btn-primary" style="background:var(--danger); width:100%;">Generate Code</button>
+                <div id="admGiftList" style="margin-top:10px; font-size:0.9em;"></div>
+            </div>
+
+            <div class="admin-box">
+                <h4 style="color:var(--primary);">Manage Payment Methods</h4>
+                <input id="admBankName" placeholder="Bank Name (e.g. CBE, Telebirr)" class="modern-input">
+                <input id="admBankNum" placeholder="Account Number" class="modern-input">
+                <input id="admBankHolder" placeholder="Account Holder Name" class="modern-input">
+                <button onclick="admAddBank()" class="btn-primary" style="width:100%; margin-top:5px;">Add Payment Method</button>
+                <div id="admBankList" style="margin-top:10px; font-size:0.8em; color:var(--text-muted);"></div>
+            </div>
+
+            <div class="admin-box">
+                <h4 style="color:var(--primary);">Manage Invitation Tasks</h4>
+                <p style="font-size:0.8em; color:var(--text-muted);">Set required invites and reward amount.</p>
+                <input id="admTaskReq" placeholder="Required Invites (People)" class="modern-input" type="number">
+                <input id="admTaskReward" placeholder="Reward Amount (ETB)" class="modern-input" type="number">
+                
+                <button onclick="admSaveTask()" id="btnSaveTask" class="btn-primary" style="background:var(--success); width:100%;">Add New Task</button>
+                <button onclick="admCancelTaskEdit()" id="btnCancelTaskEdit" class="btn-primary" style="background:var(--text-dark); width:100%; margin-top:10px; display:none;">Cancel Edit</button>
+
+                <div id="admTasksList" style="margin-top:20px; border-top:1px solid var(--border); padding-top:10px;"></div>
+            </div>
+
+            <div class="admin-box">
+                <h4 style="color:var(--success);">Manage Plans / Products</h4>
+                <p style="font-size:0.8em; color:var(--text-muted);">Fill form to Add New or Click Edit on existing.</p>
+                <input id="admName" placeholder="Plan Name" class="modern-input">
+                <input id="admImg" placeholder="Image URL (http...)" class="modern-input">
+                <input id="admPrice" placeholder="Price (ETB)" class="modern-input">
+                <input id="admDaily" placeholder="Daily Return (ETB)" class="modern-input">
+                <input id="admDays" placeholder="Plan Duration (Days)" class="modern-input" type="number">
+                <input id="admLimit" placeholder="Purchase Limit (0 = Unlimited)" class="modern-input" type="number">
+                
+                <button onclick="admAddPlan()" id="btnSavePlan" class="btn-primary" style="background:var(--success); width:100%;">Add New Plan</button>
+                <button onclick="admCancelEdit()" id="btnCancelEdit" class="btn-primary" style="background:var(--text-dark); width:100%; margin-top:10px; display:none;">Cancel Edit</button>
+
+                <div id="admPlansList" style="margin-top:20px; border-top:1px solid var(--border); padding-top:10px;"></div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,am,om,ti',
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <script>
+        // --- FIREBASE CONFIGURATION ---
+        const firebaseConfig = {
+            apiKey: "AIzaSyCpjM4ag00NcQOu13eYA_U8txHMY80hPC0",
+            authDomain: "nbaa-8b8fe.firebaseapp.com",
+            databaseURL: "https://nbaa-8b8fe-default-rtdb.firebaseio.com",
+            projectId: "nbaa-8b8fe",
+            storageBucket: "nbaa-8b8fe.firebasestorage.app",
+            messagingSenderId: "1007670379274",
+            appId: "1:1007670379274:web:db06072796fdc5748270f3",
+            measurementId: "G-NXJEQTP1QE"
+        };
+
+        const app = firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+        try { const analytics = firebase.analytics(); } catch(e){}
+
+        // --- CORE VARIABLES ---
+        let currentUser = null;
+        let isLogin = true;
+        let selectedBankData = null;
+        let editingPlanId = null; 
+        let editingTaskId = null; 
+        let supportConfig = { channel: 'https://t.me/+dhT-OEP10zIyN2Jk', group: 'https://t.me/techriginvestment', cs: 'https://t.me/TechRigSupport' };
+        let globalHistoryData = []; 
+
+        // --- AUTH LOGIC ---
+        function toggleAuth() {
+            isLogin = !isLogin;
+            document.getElementById('authBtn').innerText = isLogin ? "Secure Login" : "Create Account";
+            document.getElementById('switchTxt').innerText = isLogin ? "Create new account" : "Already have an account? Login";
+            document.getElementById('authConf').style.display = isLogin ? 'none' : 'block';
+            document.getElementById('authRef').style.display = isLogin ? 'none' : 'block';
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const refParam = urlParams.get('ref');
+            if (refParam) {
+                isLogin = false;
+                document.getElementById('authBtn').innerText = "Create Account";
+                document.getElementById('switchTxt').innerText = "Already have an account? Login";
+                document.getElementById('authConf').style.display = 'block';
+                document.getElementById('authRef').style.display = 'block';
+                document.getElementById('authRef').value = refParam;
+                document.getElementById('authRef').setAttribute('readonly', true);
+            }
+        });
+
+        document.getElementById('authForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const phone = document.getElementById('authPhone').value;
+            const pass = document.getElementById('authPass').value;
+
+            if(phone === '44' && pass === 'a444') {
+                openOverlay('adminPanel');
+                loadAdminData();
+                return;
+            }
+
+            const uid = "u_" + phone;
+
+            if(isLogin) {
+                db.ref('users/' + uid).once('value', snap => {
+                    if(snap.exists() && snap.val().pass === pass) {
+                        enterApp(snap.val());
+                    } else {
+                        showToast("Invalid Credentials");
+                    }
+                });
+            } else {
+                if(pass !== document.getElementById('authConf').value) { showToast("Passwords do not match"); return; }
+                
+                db.ref('users/' + uid).once('value', snap => {
+                    if(snap.exists()) { showToast("Account already exists"); return; }
+                    
+                    const newUser = {
+                        phone: phone, pass: pass, balance: 300, 
+                        refCode: Math.random().toString(36).substring(2,8).toUpperCase(),
+                        refBy: document.getElementById('authRef').value || "ROOT",
+                        joinDate: Date.now(), totalDep: 0, totalWith: 0, today: 0, 
+                        totalIncome: 0, comm: 0
+                    };
+
+                    db.ref('users/' + uid).set(newUser).then(() => {
+                        showToast("Account created! +300 ETB Bonus");
+                        enterApp(newUser);
+                    });
+                });
+            }
+        });
+
+        function enterApp(user) {
+            currentUser = user;
+            document.getElementById('authSection').style.display = 'none';
+            document.getElementById('appContainer').style.display = 'block';
+            
+            db.ref('users/u_' + user.phone).on('value', snap => {
+                if(snap.exists()){
+                    currentUser = snap.val();
+                    updateUI();
+                }
+            });
+            
+            db.ref('settings/support').on('value', snap => {
+                if(snap.exists()) {
+                    let sc = snap.val();
+                    // Override with dynamic configs if available, otherwise fallback
+                    if (sc.cs) supportConfig.cs = sc.cs;
+                    if (sc.channel) supportConfig.channel = sc.channel;
+                    if (sc.group) supportConfig.group = sc.group;
+                }
+            });
+
+            loadPlans();
+            loadDepositMethods();
+            loadWithdrawTicker();
+        }
+
+        function updateUI() {
+            document.getElementById('userBal').innerText = (currentUser.balance || 0).toFixed(2);
+            document.getElementById('withBal').innerText = (currentUser.balance || 0).toFixed(2);
+            document.getElementById('teamBal').innerText = (currentUser.comm || 0).toFixed(2);
+            document.getElementById('dailyRev').innerText = (currentUser.today || 0).toFixed(2);
+            document.getElementById('inviteCodeDisplay').innerText = currentUser.refCode || '------';
+            
+            document.getElementById('uPhoneDisplay').innerText = "+251 " + currentUser.phone;
+            
+            let myInv = currentUser.totalDep || 0;
+            let lvl = myInv >= 10000 ? 3 : (myInv >= 4000 ? 2 : (myInv >= 1000 ? 1 : 0));
+            document.getElementById('uLevelTitle').innerText = `Investor Level ${lvl}`;
+            
+            // Populate Bank Details if already saved
+            if(currentUser.bank) {
+                document.getElementById('bindName').value = currentUser.bank.name || "";
+                document.getElementById('bindNum').value = currentUser.bank.num || "";
+                document.getElementById('bindType').value = currentUser.bank.type || "CBE";
+            }
+        }
+
+        // --- NAVIGATION & UI HELPERS ---
+        function switchPage(pid, btn) {
+            window.scrollTo(0,0);
+            document.querySelectorAll('.page-section').forEach(p => p.classList.add('hidden'));
+            document.getElementById(pid).classList.remove('hidden');
+            if(btn !== undefined && btn !== null) {
+                document.querySelectorAll('.nav-link').forEach(n => n.classList.remove('active'));
+                btn.classList.add('active');
+            }
+            if(pid === 'pageTeam') loadTeam(1);
+        }
+
+        function openOverlay(id) { document.getElementById(id).style.display = 'block'; }
+        function closeOverlay(id) { document.getElementById(id).style.display = 'none'; }
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            t.innerText = msg; t.classList.add('show');
+            setTimeout(() => t.classList.remove('show'), 3000);
+        }
+        function logout() { location.reload(); }
+
+        // --- NEW FEATURES ---
+        function downloadApp() {
+            showToast("Downloading App File... Please Wait.");
+            
+            // Create a hidden link to trigger the download
+            const link = document.createElement('a');
+            link.href = 'ch.apk'; // Assumes the app file is named ch.apk in the same folder
+            link.download = 'ch.apk';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            setTimeout(() => { showToast("Download Started Successfully."); }, 2000);
+        }
+
+        function openSupport(type) {
+            const url = supportConfig[type];
+            if(url) window.open(url, '_blank');
+            else showToast("Support link not set.");
+        }
+
+        function loadWithdrawTicker() {
+            const track = document.getElementById('withdrawTicker');
+            db.ref('withdrawals').orderByChild('status').equalTo('paid').limitToLast(8).on('value', snap => {
+                if(!snap.exists()) return;
+                track.innerHTML = "";
+                const data = []; snap.forEach(s => data.push(s.val()));
+                const displayData = [...data.reverse(), ...data]; 
+
+                displayData.forEach(w => {
+                    let phone = w.uid.replace('u_', '');
+                    let masked = phone.substring(0, 3) + "****" + phone.substring(phone.length - 2);
+                    track.innerHTML += `<div class="ticker-item"><i class="fas fa-circle-check" style="color:var(--success)"></i> ${masked} cashed out <span>${w.amount} ETB</span></div>`;
+                });
+            });
+        }
+
+        // --- STORE / PLANS LOGIC ---
+        function loadPlans() {
+            db.ref('investments/u_' + currentUser.phone).once('value', invSnap => {
+                const myInvs = invSnap.val() || {};
+                const counts = {};
+                Object.values(myInvs).forEach(inv => counts[inv.name] = (counts[inv.name] || 0) + 1);
+
+                db.ref('plans').on('value', snap => {
+                    const list = document.getElementById('plansList');
+                    list.innerHTML = ""; 
+                    const plans = snap.val();
+                    
+                    if(!plans) { list.innerHTML = "<p style='text-align:center;'>Store Empty</p>"; return; }
+
+                    Object.keys(plans).forEach(k => {
+                        const p = plans[k];
+                        const days = p.days || 30;
+                        const limit = p.limit || 10;
+                        const userCount = counts[p.name] || 0;
+                        const isSoldOut = userCount >= limit;
+                        const imgUrl = p.img || 'https://images.unsplash.com/photo-1587831990711-23ca6441447b?q=80&w=500&auto=format&fit=crop';
+
+                        let btnHtml = isSoldOut 
+                            ? `<button class="btn-sold-modern" disabled>Limit Reached</button>`
+                            : `<button class="btn-buy-modern" onclick="buyPlan('${p.name}', ${p.price}, ${p.daily}, ${days}, ${limit})">Rent Hardware</button>`;
+
+                        list.innerHTML += `
+                        <div class="pc-card">
+                            <div class="pc-header-img">
+                                <div class="pc-badge-modern"><i class="fas fa-clock"></i> ${days} Days</div>
+                                <img src="${imgUrl}" alt="PC">
+                            </div>
+                            <div class="pc-body">
+                                <div class="pc-title">${p.name}</div>
+                                <div class="pc-stats-modern">
+                                    <div class="pc-stat-box">
+                                        <span class="pc-stat-label">Daily Return</span>
+                                        <span class="pc-stat-value">${p.daily} ETB</span>
+                                    </div>
+                                    <div class="pc-stat-box" style="background: rgba(16, 185, 129, 0.05); border-color: rgba(16, 185, 129, 0.1);">
+                                        <span class="pc-stat-label" style="color:var(--success)">Total ROI</span>
+                                        <span class="pc-stat-value" style="color:var(--success)">${p.daily * days} ETB</span>
+                                    </div>
+                                </div>
+                                <div class="pc-footer">
+                                    <div class="pc-price-wrap">
+                                        <span class="pc-price-label">Investment</span>
+                                        <span class="pc-price-val">${p.price} ETB</span>
+                                    </div>
+                                    ${btnHtml}
+                                </div>
+                            </div>
+                        </div>`;
+                    });
+                });
+            });
+        }
+
+        function buyPlan(name, price, daily, days, limit) {
+            db.ref('investments/u_' + currentUser.phone).once('value', invSnap => {
+                let isFirstInvestment = !invSnap.exists() || invSnap.numChildren() === 0;
+                let specificPlanCount = 0;
+                
+                if (invSnap.exists()) {
+                    invSnap.forEach(child => {
+                        if (child.val().name === name) specificPlanCount++;
+                    });
+                }
+
+                if(specificPlanCount >= limit) { showToast("Purchase limit reached."); return; }
+                if(currentUser.balance < price) { showToast("Insufficient Funds"); return; }
+                
+                if(confirm(`Confirm lease of ${name} for ${price} ETB?`)) {
+                    db.ref('users/u_' + currentUser.phone).update({ balance: currentUser.balance - price });
+                    db.ref('investments/u_' + currentUser.phone).push({ name, price, daily, days, date: Date.now() });
+                    
+                    if (isFirstInvestment) {
+                        handleCommission(currentUser.refBy, price, 1);
+                    }
+                    
+                    showToast("Hardware Leased!");
+                    setTimeout(loadPlans, 1000);
+                }
+            });
+        }
+
+        function handleCommission(refCode, price, level) {
+            if(!refCode || refCode === "ROOT" || level > 3) return;
+            
+            let rate = level === 1 ? 0.20 : (level === 2 ? 0.05 : 0.02); 
+            
+            db.ref('users').orderByChild('refCode').equalTo(refCode).once('value', snap => {
+                if(snap.exists()) {
+                    const key = Object.keys(snap.val())[0];
+                    const up = snap.val()[key];
+                    db.ref('users/' + key).update({ 
+                        balance: (up.balance||0) + (price*rate), 
+                        comm: (up.comm||0) + (price*rate),
+                        totalIncome: (up.totalIncome||0) + (price*rate)
+                    });
+                    handleCommission(up.refBy, price, level + 1);
+                }
+            });
+        }
+
+        // --- MY PCs & MINING ---
+        function goToMyRigsNav(btn) {
+            switchPage('pageMyRigs', btn);
+            loadMyRigsData();
+        }
+
+        function loadMyRigsData() {
+            const list = document.getElementById('myActiveRigsList');
+            list.innerHTML = '<p style="text-align:center;">Scanning devices...</p>';
+            
+            db.ref('investments/u_' + currentUser.phone).once('value', snap => {
+                list.innerHTML = "";
+                let totalDaily = 0; let hasRigs = false;
+
+                if(snap.exists()) {
+                    hasRigs = true;
+                    snap.forEach(c => {
+                        const p = c.val(); totalDaily += parseInt(p.daily);
+                        list.innerHTML += `
+                        <div style="background:var(--secondary); border:1px solid var(--border); padding:15px; border-radius:12px; margin-bottom:10px; border-left:4px solid var(--success);">
+                            <div style="font-weight:bold; font-size:1.1em; color:var(--text-dark);">${p.name}</div>
+                            <div style="color:var(--text-muted); font-size:0.85em; margin-top:5px;">Generating: <strong style="color:var(--success);">${p.daily} ETB/Day</strong></div>
+                        </div>`;
+                    });
+                } else { list.innerHTML = '<p style="text-align:center; color:var(--text-muted);">No hardware found.</p>'; }
+
+                if (hasRigs && totalDaily > 0) {
+                    const todayStr = new Date().toDateString();
+                    if (currentUser.lastMiningCollection === todayStr) {
+                        list.insertAdjacentHTML('afterbegin', `<div style="background: rgba(16, 185, 129, 0.1); color: var(--success); padding: 12px; border-radius: 8px; text-align: center; margin-bottom: 15px; font-weight: bold; border: 1px solid rgba(16, 185, 129, 0.2);"><i class="fas fa-check-circle"></i> Today's Profit (${totalDaily} ETB) Added Automatically</div>`);
+                    } else {
+                        list.insertAdjacentHTML('afterbegin', `<div style="background: rgba(245, 158, 11, 0.1); color: var(--warning); padding: 12px; border-radius: 8px; text-align: center; margin-bottom: 15px; font-weight: bold; border: 1px solid rgba(245, 158, 11, 0.2);"><i class="fas fa-clock"></i> Waiting for Admin to release today's profit...</div>`);
+                    }
+                }
+            });
+        }
+
+        function loadDepositMethods() {
+            db.ref('settings/depositMethods').on('value', snap => {
+                const con = document.getElementById('depositMethodButtons'); con.innerHTML = "";
+                const methods = snap.val();
+                if(methods) {
+                    Object.keys(methods).forEach(k => {
+                        const m = methods[k];
+                        con.innerHTML += `<button class="btn-sm" style="border:1px solid var(--primary); color:var(--primary); background:transparent;" onclick="selBank('${m.name}','${m.num}','${m.holder}')">${m.name}</button>`;
+                    });
+                }
+            });
+        }
+
+        function selBank(name, num, holder) {
+            document.getElementById('depBankName').innerText = name;
+            document.getElementById('depAccNum').innerText = num;
+            document.getElementById('depHolder').innerText = holder;
+            document.getElementById('bankDetails').style.display = 'block';
+        }
+
+        function submitDeposit() {
+            const amt = document.getElementById('depAmount').value;
+            const tid = document.getElementById('depRef').value;
+            if(!amt || !tid) { showToast("Fill all fields"); return; }
+            if(parseInt(amt) < 1200) { showToast("Minimum Deposit 1200 ETB"); return; }
+
+            db.ref('deposits').push({
+                uid: "u_" + currentUser.phone, phone: currentUser.phone,
+                amount: parseInt(amt), tid: tid, status: 'pending', date: Date.now() 
+            });
+            showToast("Deposit Under Review");
+            
+            switchPage('pageHome', document.querySelectorAll('.nav-link')[0]);
+            document.getElementById('depAmount').value = ''; 
+            document.getElementById('depRef').value = '';
+            document.getElementById('bankDetails').style.display = 'none';
+        }
+
+        function goToWithdraw() {
+            if(!currentUser.bank) { showToast("Please Link Bank First"); switchPage('pageBank', document.querySelectorAll('.nav-link')[4]); return; }
+            
+            db.ref('investments/u_' + currentUser.phone).once('value', snap => {
+                if(!snap.exists() || snap.numChildren() === 0) {
+                    showToast("You must invest in a PC plan before withdrawing!");
+                    return;
+                }
+                switchPage('pageWithdraw', document.querySelectorAll('.nav-link')[0]);
+            });
+        }
+
+        function submitWithdraw() {
+            const amt = parseInt(document.getElementById('withAmount').value);
+            const pass = document.getElementById('withPass').value;
+            if(amt < 300) { showToast("Minimum 300 ETB"); return; }
+            if(amt > currentUser.balance) { showToast("Insufficient Balance"); return; }
+            if(pass !== currentUser.pass) { showToast("Invalid Password"); return; } 
+            
+            const netAmt = amt - (amt * 0.15); // 15% fee
+
+            db.ref('users/u_' + currentUser.phone).update({ 
+                balance: currentUser.balance - amt, totalWith: (currentUser.totalWith || 0) + netAmt
+            });
+            
+            // Add bankDetails to the withdrawal request for Admin to see
+            db.ref('withdrawals').push({ 
+                uid: "u_" + currentUser.phone, 
+                amount: netAmt, 
+                status: 'pending', 
+                date: Date.now(),
+                bankDetails: currentUser.bank || null
+            });
+            showToast("Payout Requested! 15% fee applied."); 
+            
+            switchPage('pageHome', document.querySelectorAll('.nav-link')[0]);
+            document.getElementById('withAmount').value = '';
+            document.getElementById('withPass').value = '';
+        }
+
+        function saveBank() {
+            const bank = {
+                name: document.getElementById('bindName').value,
+                num: document.getElementById('bindNum').value,
+                type: document.getElementById('bindType').value
+            };
+            if(!bank.name || !bank.num) { showToast("Complete form"); return; }
+            db.ref('users/u_' + currentUser.phone).update({ bank: bank });
+            showToast("Payout Info Saved"); 
+            switchPage('pageMe', document.querySelectorAll('.nav-link')[4]);
+        }
+
+        // --- MODERN TRANSACTION HISTORY ---
+        function openHistoryFull() {
+            switchPage('pageHistory', document.querySelectorAll('.nav-link')[4]);
+            const wrap = document.getElementById('histContentFull'); 
+            
+            wrap.innerHTML = `
+                <div class="history-tabs">
+                    <div class="hist-tab active" id="tab-all" onclick="filterHistory('all')">All</div>
+                    <div class="hist-tab" id="tab-deposit" onclick="filterHistory('deposit')">Deposit</div>
+                    <div class="hist-tab" id="tab-withdraw" onclick="filterHistory('withdraw')">Withdrawal</div>
+                </div>
+                <div id="histListContainer">
+                    <div style="text-align:center; padding: 30px;">
+                        <i class="fas fa-spinner fa-spin" style="font-size:2em; color:var(--primary);"></i>
+                        <p style="color:var(--text-muted); margin-top:10px;">Loading records...</p>
+                    </div>
+                </div>
+            `;
+            
+            db.ref('deposits').orderByChild('uid').equalTo('u_' + currentUser.phone).once('value', dSnap => {
+                db.ref('withdrawals').orderByChild('uid').equalTo('u_' + currentUser.phone).once('value', wSnap => {
+                    let records = [];
+                    
+                    if(dSnap.exists()) {
+                        dSnap.forEach(s => { let v = s.val(); v.type = 'deposit'; records.push(v); });
+                    }
+                    if(wSnap.exists()) {
+                        wSnap.forEach(s => { let v = s.val(); v.type = 'withdraw'; records.push(v); });
+                    }
+                    
+                    // Sort by newest first
+                    records.sort((a, b) => b.date - a.date);
+                    globalHistoryData = records;
+                    
+                    filterHistory('all'); // Show all by default
+                });
+            });
+        }
+
+        function filterHistory(filterType) {
+            // Update Tab Active Style
+            ['all', 'deposit', 'withdraw'].forEach(t => {
+                document.getElementById('tab-' + t).classList.remove('active');
+            });
+            document.getElementById('tab-' + filterType).classList.add('active');
+
+            const container = document.getElementById('histListContainer');
+            let html = "";
+            
+            let filtered = globalHistoryData;
+            if(filterType !== 'all') {
+                filtered = globalHistoryData.filter(item => item.type === filterType);
+            }
+
+            if(filtered.length === 0) {
+                container.innerHTML = `
+                    <div style="text-align:center; padding: 40px 20px; background:var(--surface); border-radius:16px; border:1px dashed var(--border); margin-top:20px;">
+                        <i class="fas fa-folder-open" style="font-size:3em; color:var(--text-muted); opacity:0.5; margin-bottom:15px;"></i>
+                        <h4 style="color:var(--text-dark);">No Records Found</h4>
+                        <p style="font-size:0.85em; color:var(--text-muted);">You don't have any ${filterType === 'all' ? 'transaction' : filterType} records yet.</p>
+                    </div>`;
+                return;
+            }
+
+            filtered.forEach(item => {
+                let dateStr = item.date ? new Date(item.date).toLocaleString() : "Unknown Date";
+                let isDep = item.type === 'deposit';
+                
+                let iconHtml = isDep 
+                    ? `<div class="hist-icon-box hist-icon-dep"><i class="fas fa-arrow-down"></i></div>`
+                    : `<div class="hist-icon-box hist-icon-with"><i class="fas fa-arrow-up"></i></div>`;
+                    
+                let titleStr = isDep ? "Account Funding" : "Payout Request";
+                if(isDep && item.tid) titleStr += ` <span style="font-size:0.75em; color:var(--text-muted); font-weight:normal;">(${item.tid})</span>`;
+                
+                let amtClass = isDep ? "dep" : "with";
+                let amtSign = isDep ? "+" : "-";
+
+                // Map statuses to appropriate icons and colors
+                let statText, badgeClass;
+                if(item.status === 'pending') { 
+                    statText = "⏳ Pending"; badgeClass = "status-pending"; 
+                }
+                else if(item.status === 'approved' || item.status === 'paid') { 
+                    statText = "✅ Success"; badgeClass = "status-paid"; 
+                }
+                else if(item.status === 'rejected') { 
+                    statText = "❌ Rejected"; badgeClass = "status-rejected"; 
+                }
+                else { 
+                    statText = item.status; badgeClass = "status-pending"; 
+                }
+
+                html += `
+                <div class="hist-item">
+                    <div style="display:flex; align-items:center; overflow:hidden;">
+                        ${iconHtml}
+                        <div class="hist-details">
+                            <div class="hist-title">${titleStr}</div>
+                            <div class="hist-date">${dateStr}</div>
+                        </div>
+                    </div>
+                    <div class="hist-amount-box">
+                        <div class="hist-amount ${amtClass}">${amtSign}${item.amount} ETB</div>
+                        <div class="hist-badge ${badgeClass}">${statText}</div>
+                    </div>
+                </div>`;
+            });
+
+            container.innerHTML = html;
+        }
+
+        // --- PASSWORD & SYSTEM LOGIC ---
+        function changePassword() {
+            const oldP = document.getElementById('cpOld').value;
+            const newP = document.getElementById('cpNew').value;
+            if(!oldP || !newP) { showToast("Please fill all fields"); return; }
+            if(oldP !== currentUser.pass) { showToast("Incorrect Current Password"); return; }
+            
+            db.ref('users/u_' + currentUser.phone).update({ pass: newP }).then(() => {
+                showToast("Password Successfully Updated!");
+                currentUser.pass = newP;
+                document.getElementById('cpOld').value = '';
+                document.getElementById('cpNew').value = '';
+                switchPage('pageMe', document.querySelectorAll('.nav-link')[4]);
+            });
+        }
+
+        // --- GOOGLE TRANSLATE LANGUAGE CHANGING LOGIC ---
+        function changeAppLanguage(langCode, langName) {
+            let selectElement = document.querySelector('.goog-te-combo');
+            if (selectElement) {
+                selectElement.value = langCode;
+                selectElement.dispatchEvent(new Event('change'));
+            }
+            showToast("Language set to " + langName);
+            setTimeout(() => { switchPage('pageMe', document.querySelectorAll('.nav-link')[4]); }, 1000);
+        }
+
+        // --- DYNAMIC TASK LOGIC ---
+        function openTaskPage() {
+            switchPage('pageTask', null);
+            renderTasks();
+        }
+
+        function renderTasks() {
+            const list = document.getElementById('taskListContent');
+            list.innerHTML = '<p style="text-align:center;"><i class="fas fa-spinner fa-spin" style="font-size:2em; color:var(--primary);"></i></p>';
+
+            db.ref('users').once('value', snap => {
+                const all = snap.val();
+                let l1Count = 0;
+                
+                if(all) {
+                    Object.values(all).forEach(u => {
+                        if(u.refBy === currentUser.refCode) {
+                            l1Count++;
+                        }
+                    });
+                }
+                
+                document.getElementById('taskInviteCount').innerText = l1Count;
+
+                db.ref('settings/tasks').on('value', taskSnap => {
+                    list.innerHTML = '';
+                    let claimed = currentUser.claimedTasks || {};
+                    const taskData = taskSnap.val();
+                    
+                    if(!taskData) {
+                        list.innerHTML = '<p style="text-align:center; color:var(--text-muted);">No tasks available at the moment.</p>';
+                        return;
+                    }
+
+                    let tasks = Object.keys(taskData).map(k => ({ id: k, ...taskData[k] }));
+                    tasks.sort((a, b) => parseInt(a.req) - parseInt(b.req));
+
+                    tasks.forEach(t => {
+                        let isClaimed = claimed['task_' + t.req];
+                        let canClaim = l1Count >= parseInt(t.req) && !isClaimed;
+                        let btnHtml = '';
+
+                        if(isClaimed) {
+                            btnHtml = `<button class="btn-sold-modern" style="padding: 10px 15px; font-size: 0.8em;" disabled><i class="fas fa-check"></i> Claimed</button>`;
+                        } else if(canClaim) {
+                            btnHtml = `<button class="btn-primary" style="padding: 10px 15px; font-size: 0.8em; background:var(--success); border-radius: 8px;" onclick="claimTask(${t.req}, ${t.reward})">Claim Reward</button>`;
+                        } else {
+                            btnHtml = `<button class="btn-sold-modern" style="padding: 10px 15px; font-size: 0.8em; border-radius: 8px;" disabled>${l1Count} / ${t.req}</button>`;
+                        }
+
+                        list.innerHTML += `
+                        <div style="background:var(--surface); border:1px solid var(--border); padding:15px; border-radius:12px; margin-bottom:10px; display:flex; justify-content:space-between; align-items:center; box-shadow: var(--shadow);">
+                            <div>
+                                <strong style="color:var(--text-dark); font-size: 1.1em;">Invite ${t.req} Friends</strong>
+                                <div style="font-size: 0.9em; color: var(--success); font-weight:800; margin-top: 5px;">+${t.reward} ETB</div>
+                            </div>
+                            <div>${btnHtml}</div>
+                        </div>`;
+                    });
+                });
+            });
+        }
+
+        function claimTask(req, reward) {
+            db.ref('users/u_' + currentUser.phone).child('claimedTasks').child('task_' + req).set(true);
+            db.ref('users/u_' + currentUser.phone).update({
+                balance: (currentUser.balance || 0) + parseInt(reward),
+                totalIncome: (currentUser.totalIncome || 0) + parseInt(reward)
+            }).then(() => {
+                showToast(`Successfully claimed ${reward} ETB!`);
+                renderTasks(); 
+            });
+        }
+
+        // --- TEAM LOGIC ---
+        function loadTeam(lvl) {
+            ['tabL1', 'tabL2', 'tabL3'].forEach(id => {
+                document.getElementById(id).style.background = 'transparent';
+                document.getElementById(id).style.boxShadow = 'none';
+                document.getElementById(id).style.color = 'var(--text-muted)';
+            });
+            document.getElementById('tabL'+lvl).style.background = 'var(--surface)';
+            document.getElementById('tabL'+lvl).style.boxShadow = 'var(--shadow)';
+            document.getElementById('tabL'+lvl).style.color = 'var(--text-dark)';
+
+            const list = document.getElementById('teamList'); 
+            list.innerHTML = '<div style="text-align:center; padding: 20px;"><i class="fas fa-spinner fa-spin" style="font-size:2em; color:var(--primary);"></i></div>';
+
+            db.ref('users').once('value', snap => {
+                const all = snap.val(); if(!all) return;
+                let l1=[], l2=[], l3=[];
+                
+                Object.values(all).forEach(u => { if(u.refBy === currentUser.refCode) l1.push(u); });
+                l1.forEach(u1 => Object.values(all).forEach(u => { if(u.refBy === u1.refCode) l2.push(u); }));
+                l2.forEach(u2 => Object.values(all).forEach(u => { if(u.refBy === u2.refCode) l3.push(u); }));
+
+                const totalMembers = l1.length + l2.length + l3.length;
+                const activeL1 = l1.filter(u => (u.totalDep || 0) > 0).length;
+                const activeL2 = l2.filter(u => (u.totalDep || 0) > 0).length;
+                const activeL3 = l3.filter(u => (u.totalDep || 0) > 0).length;
+                const totalActive = activeL1 + activeL2 + activeL3;
+
+                document.getElementById('totalMembersStat').innerText = totalMembers;
+                document.getElementById('activeMembersStat').innerText = totalActive;
+                document.getElementById('countL1').innerText = l1.length;
+                document.getElementById('countL2').innerText = l2.length;
+                document.getElementById('countL3').innerText = l3.length;
+
+                let target = lvl===1?l1:(lvl===2?l2:l3);
+                let activeInLevel = lvl===1?activeL1:(lvl===2?activeL2:activeL3);
+                document.getElementById('activeLevelCount').innerText = activeInLevel;
+
+                list.innerHTML = "";
+                if(target.length === 0) { 
+                    list.innerHTML = `<div style="text-align:center; padding: 30px; background:var(--surface); border-radius:12px; border:1px dashed var(--border);">
+                        <i class="fas fa-users-slash" style="font-size:2em; color:var(--text-muted); margin-bottom:10px;"></i>
+                        <div style="color:var(--text-muted);">No members found in Level ${lvl}</div>
+                    </div>`; 
+                    return; 
+                }
+
+                target.forEach(u => {
+                    let joinDate = u.joinDate ? new Date(u.joinDate).toLocaleDateString() : "Unknown";
+                    let act = (u.totalDep || 0) > 0 
+                        ? `<span style="color:var(--success); font-size:0.85em; font-weight:bold; background:#d1fae5; padding:5px 10px; border-radius:20px;"><i class="fas fa-check-circle"></i> Active</span>` 
+                        : `<span style="color:var(--text-muted); font-size:0.85em; font-weight:bold; background:var(--secondary); padding:5px 10px; border-radius:20px;"><i class="fas fa-times-circle"></i> Inactive</span>`;
+                    
+                    list.innerHTML += `
+                    <div style="background:var(--surface); border:1px solid var(--border); padding:15px; border-radius:12px; margin-bottom:10px; display:flex; justify-content:space-between; align-items:center; box-shadow: var(--shadow);">
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <div style="width: 45px; height: 45px; background: var(--secondary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--primary); font-size: 1.2em;">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div>
+                                <strong style="color:var(--text-dark); font-size: 1.1em;">+251 ${u.phone}</strong>
+                                <div style="font-size: 0.75em; color: var(--text-muted); margin-top: 2px;">Joined: ${joinDate}</div>
+                            </div>
+                        </div>
+                        <div>${act}</div>
+                    </div>`;
+                });
+            });
+        }
+
+        function copyRef() {
+            const url = window.location.href.split('?')[0] + '?ref=' + currentUser.refCode;
+            navigator.clipboard.writeText(url).then(() => showToast("Link & Code Copied Successfully!"));
+        }
+
+        function dailyCheckIn() {
+            const today = new Date().toDateString();
+            if(currentUser.lastCheck === today) { showToast("Already Checked-in Today"); return; }
+            db.ref('users/u_' + currentUser.phone).update({ 
+                balance: currentUser.balance + 5, 
+                today: (currentUser.today || 0) + 5, 
+                totalIncome: (currentUser.totalIncome || 0) + 5, 
+                lastCheck: today
+            });
+            showToast("+5 ETB Daily Bonus");
+            
+            setTimeout(() => { switchPage('pageHome', document.querySelectorAll('.nav-link')[0]); }, 1500);
+        }
+
+        function redeemGift() {
+            const code = document.getElementById('giftCode').value;
+            if(!code) return;
+            db.ref('giftCodes/' + code).once('value', snap => {
+                if(snap.exists() && snap.val().status === 'active') {
+                    const amt = snap.val().amount;
+                    db.ref('users/u_' + currentUser.phone).update({ 
+                        balance: currentUser.balance + amt,
+                        totalIncome: (currentUser.totalIncome || 0) + amt 
+                    });
+                    db.ref('giftCodes/' + code).remove();
+                    showToast(`Redeemed ${amt} ETB`); 
+                    document.getElementById('giftCode').value = '';
+                    switchPage('pageHome', document.querySelectorAll('.nav-link')[0]);
+                } else { showToast("Invalid or Used Code"); }
+            });
+        }
+
+        // --- ADMIN LOGIC ---
+        function loadAdminData() {
+            db.ref('users').on('value', snap => {
+                let totalU = 0; let activeU = 0; let totalInv = 0; let totalWith = 0;
+                snap.forEach(c => {
+                    totalU++;
+                    let dep = (c.val().totalDep || 0);
+                    let withAmt = (c.val().totalWith || 0);
+                    totalInv += dep;
+                    totalWith += withAmt;
+                    if (dep > 0) activeU++;
+                });
+                document.getElementById('admStatUsers').innerText = totalU;
+                document.getElementById('admStatActiveUsers').innerText = activeU;
+                document.getElementById('admStatInvest').innerText = totalInv + " ETB";
+                
+                if(document.getElementById('admStatTotalDep')) document.getElementById('admStatTotalDep').innerText = totalInv + " ETB";
+                if(document.getElementById('admStatTotalWith')) document.getElementById('admStatTotalWith').innerText = totalWith + " ETB";
+                if(document.getElementById('admStatNetBal')) document.getElementById('admStatNetBal').innerText = (totalInv - totalWith) + " ETB";
+            });
+
+            db.ref('settings/support').on('value', snap => {
+                if(snap.exists()) {
+                    const links = snap.val();
+                    document.getElementById('admLinkChannel').value = links.channel || '';
+                    document.getElementById('admLinkGroup').value = links.group || '';
+                    document.getElementById('admLinkCS').value = links.cs || '';
+                }
+            });
+
+            db.ref('settings/miningStatus').on('value', snap => {
+                const status = snap.val();
+                const todayStr = new Date().toDateString();
+                const disp = document.getElementById('admIncomeStatus');
+                if(status && status.date === todayStr && status.released) {
+                    disp.innerText = "Status: Released for Today (" + todayStr + ")";
+                    disp.style.color = "var(--success)";
+                } else {
+                    disp.innerText = "Status: NOT Released for Today";
+                    disp.style.color = "var(--danger)";
+                }
+            });
+
+            db.ref('deposits').on('value', snap => {
+                const d = document.getElementById('admDepList');
+                d.innerHTML = "";
+                snap.forEach(c => {
+                    const v = c.val();
+                    if(v.status === 'pending') {
+                        d.innerHTML += `<div style="border-bottom:1px solid var(--border); padding:10px 0; color:var(--text-dark);">
+                            ${v.phone} - <strong>${v.amount} ETB</strong> <br> TID: <span style="color:var(--text-muted);">${v.tid}</span> 
+                            <div style="margin-top:5px;">
+                                <button class="btn-adm-approve" onclick="approveDep('${c.key}', '${v.uid}', ${v.amount})">Approve</button>
+                                <button class="btn-adm-del" onclick="admRejectDeposit('${c.key}')">Reject</button>
+                            </div>
+                        </div>`;
+                    }
+                });
+            });
+
+            db.ref('withdrawals').on('value', snap => {
+                const w = document.getElementById('admWithList');
+                w.innerHTML = "";
+                snap.forEach(c => {
+                    const v = c.val();
+                    if(v.status === 'pending') {
+                        
+                        // NEW: Show bank details explicitly on Admin side
+                        let bankHTML = "";
+                        if (v.bankDetails) {
+                            bankHTML = `
+                            <div style="background: rgba(37, 99, 235, 0.05); border: 1px dashed rgba(37, 99, 235, 0.3); border-radius: 8px; padding: 10px; margin: 10px 0; font-size: 0.9em;">
+                                <div style="color:var(--text-muted); font-size:0.8em; text-transform:uppercase; margin-bottom:5px;">Payout Bank Details</div>
+                                <div style="display:flex; justify-content:space-between; margin-bottom:3px;">
+                                    <span>Bank Type:</span> <strong>${v.bankDetails.type}</strong>
+                                </div>
+                                <div style="display:flex; justify-content:space-between; margin-bottom:3px;">
+                                    <span>Account Name:</span> <strong>${v.bankDetails.name}</strong>
+                                </div>
+                                <div style="display:flex; justify-content:space-between;">
+                                    <span>Account Num:</span> <strong style="color:var(--primary); font-size:1.1em; letter-spacing:1px;">${v.bankDetails.num}</strong>
+                                </div>
+                            </div>`;
+                        } else {
+                            bankHTML = `<div style="color:var(--danger); font-size:0.85em; margin: 10px 0;">⚠️ No bank details found</div>`;
+                        }
+
+                        w.innerHTML += `
+                        <div style="border:1px solid var(--border); border-radius: 12px; padding:15px; background:var(--surface); box-shadow:var(--shadow); margin-bottom:15px;">
+                            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); padding-bottom:10px; margin-bottom:10px;">
+                                <div>
+                                    <div style="font-size:0.85em; color:var(--text-muted);">User: ${v.uid}</div>
+                                    <div style="font-size:0.8em; color:var(--text-muted);">${new Date(v.date).toLocaleString()}</div>
+                                </div>
+                                <div style="color:var(--danger); font-weight:900; font-size:1.3em;">${v.amount} ETB</div>
+                            </div>
+                            
+                            ${bankHTML}
+                            
+                            <div style="display:flex; gap:10px; margin-top:10px;">
+                                <button class="btn-primary" style="flex:1; background:var(--success); font-weight:bold; border-radius:8px;" onclick="admApproveWithdraw('${c.key}')">Approve</button>
+                                <button class="btn-primary" style="flex:1; background:var(--danger); font-weight:bold; border-radius:8px;" onclick="admRejectWithdraw('${c.key}', '${v.uid}', ${v.amount})">Reject & Refund</button>
+                            </div>
+                        </div>`;
+                    }
+                });
+            });
+
+            db.ref('giftCodes').on('value', snap => {
+                const list = document.getElementById('admGiftList');
+                list.innerHTML = "";
+                snap.forEach(c => {
+                    const val = c.val();
+                    if(val.status === 'active') {
+                        list.innerHTML += `
+                        <div style="display:flex; justify-content:space-between; margin-bottom:5px; border-bottom:1px solid var(--border); padding:5px;">
+                            <span style="color:var(--warning); font-weight:bold;">${c.key} (${val.amount} ETB)</span>
+                        </div>`;
+                    }
+                });
+            });
+
+            db.ref('settings/depositMethods').on('value', snap => {
+                const list = document.getElementById('admBankList');
+                list.innerHTML = "";
+                const methods = snap.val();
+                if(methods) {
+                    Object.keys(methods).forEach(k => {
+                        const m = methods[k];
+                        list.innerHTML += `<div style="padding:5px 0;">${m.name} - ${m.num} <span style="color:red; cursor:pointer; font-weight:bold; margin-left:10px;" onclick="admDelBank('${k}')">[X]</span></div>`;
+                    });
+                }
+            });
+
+            db.ref('settings/tasks').on('value', snap => {
+                const list = document.getElementById('admTasksList');
+                list.innerHTML = "";
+                const tasks = snap.val();
+                if(tasks) {
+                    let taskArr = Object.keys(tasks).map(k => ({id: k, ...tasks[k]}));
+                    taskArr.sort((a,b) => parseInt(a.req) - parseInt(b.req));
+                    
+                    taskArr.forEach(t => {
+                        list.innerHTML += `
+                        <div class="plan-item-admin">
+                            <div>
+                                <span style="color:var(--primary); font-weight:bold;">Invite ${t.req} Users</span><br>
+                                <span style="font-size:0.8em; color:var(--text-muted);">Reward: ${t.reward} ETB</span>
+                            </div>
+                            <div>
+                                <button class="btn-adm-edit" onclick="admEditTask('${t.id}', '${t.req}', '${t.reward}')">Edit</button>
+                                <button class="btn-adm-del" onclick="admDeleteTask('${t.id}')">Del</button>
+                            </div>
+                        </div>`;
+                    });
+                }
+            });
+
+            db.ref('plans').on('value', snap => {
+                const list = document.getElementById('admPlansList');
+                list.innerHTML = "";
+                snap.forEach(child => {
+                    const p = child.val();
+                    const key = child.key;
+                    const days = p.days ? p.days : 30;
+                    const limit = p.limit ? p.limit : "Unl";
+                    
+                    list.innerHTML += `
+                    <div class="plan-item-admin">
+                        <div>
+                            <span style="color:var(--primary); font-weight:bold;">${p.name}</span><br>
+                            <span style="font-size:0.8em; color:var(--text-muted);">${p.price} ETB | ${days}D | Limit: ${limit}</span>
+                        </div>
+                        <div>
+                            <button class="btn-adm-edit" onclick="admEditPlan('${key}', '${p.name}', '${p.price}', '${p.daily}', '${p.img || ''}', '${days}', '${p.limit}')">Edit</button>
+                            <button class="btn-adm-del" onclick="admDeletePlan('${key}')">Del</button>
+                        </div>
+                    </div>`;
+                });
+            });
+        }
+
+        // --- Admin Task Logic ---
+        function admSaveTask() {
+            const req = parseInt(document.getElementById('admTaskReq').value);
+            const reward = parseInt(document.getElementById('admTaskReward').value);
+
+            if(!req || !reward) { alert("Please fill both required inputs."); return; }
+
+            const taskData = { req: req, reward: reward };
+
+            if(editingTaskId) {
+                db.ref('settings/tasks/' + editingTaskId).update(taskData);
+                alert("Task Updated Successfully");
+                admCancelTaskEdit();
+            } else {
+                db.ref('settings/tasks').push(taskData);
+                alert("New Task Added Successfully");
+                admCancelTaskEdit();
+            }
+        }
+
+        function admEditTask(id, req, reward) {
+            editingTaskId = id;
+            document.getElementById('admTaskReq').value = req;
+            document.getElementById('admTaskReward').value = reward;
+            
+            const btn = document.getElementById('btnSaveTask');
+            btn.innerText = "Update Task";
+            btn.style.background = "var(--warning)";
+            btn.style.color = "black";
+            document.getElementById('btnCancelTaskEdit').style.display = "block";
+            document.getElementById('admTaskReq').scrollIntoView({behavior: 'smooth'});
+        }
+
+        function admCancelTaskEdit() {
+            editingTaskId = null;
+            document.getElementById('admTaskReq').value = "";
+            document.getElementById('admTaskReward').value = "";
+            
+            const btn = document.getElementById('btnSaveTask');
+            btn.innerText = "Add New Task";
+            btn.style.background = "var(--success)";
+            btn.style.color = "white";
+            document.getElementById('btnCancelTaskEdit').style.display = "none";
+        }
+
+        function admDeleteTask(id) {
+            if(confirm("Are you sure you want to delete this task?")) {
+                db.ref('settings/tasks/' + id).remove();
+            }
+        }
+
+        function admSaveSupportLinks() {
+            const channel = document.getElementById('admLinkChannel').value;
+            const group = document.getElementById('admLinkGroup').value;
+            const cs = document.getElementById('admLinkCS').value;
+
+            db.ref('settings/support').set({
+                channel: channel,
+                group: group,
+                cs: cs
+            }).then(() => {
+                alert("Support links updated successfully!");
+            });
+        }
+
+        function admSearchUser() {
+            const phone = document.getElementById('admSearchPhone').value;
+            if(!phone) { alert("Please enter phone number"); return; }
+            db.ref('users/u_' + phone).once('value', snap => {
+                const res = document.getElementById('admUserSearchResult');
+                if(!snap.exists()) { res.innerHTML = "<span style='color:var(--danger)'>User not found.</span>"; return; }
+                const u = snap.val();
+                let joinDate = u.joinDate ? new Date(u.joinDate).toLocaleString() : "Unknown";
+                res.innerHTML = `
+                    <div style="background:var(--secondary); padding:10px; border-radius:8px;">
+                        <p style="margin:5px 0;"><strong>Phone:</strong> ${u.phone}</p>
+                        <p style="margin:5px 0;"><strong>Password:</strong> <span style="color:var(--danger); font-weight:bold;">${u.pass}</span></p>
+                        <p style="margin:5px 0;"><strong>Balance:</strong> ${(u.balance||0).toFixed(2)} ETB</p>
+                        <p style="margin:5px 0;"><strong>Total Recharge:</strong> ${(u.totalDep || 0).toFixed(2)} ETB</p>
+                        <p style="margin:5px 0;"><strong>Total Withdrawn:</strong> ${(u.totalWith || 0).toFixed(2)} ETB</p>
+                        <p style="margin:5px 0;"><strong>Commission:</strong> ${(u.comm || 0).toFixed(2)} ETB</p>
+                        <p style="margin:5px 0;"><strong>Joined:</strong> ${joinDate}</p>
+                        <button onclick="admDeleteUser('${u.phone}')" class="btn-primary" style="background:var(--danger); width:100%; margin-top:10px;">Block / Delete User</button>
+                    </div>
+                `;
+            });
+        }
+
+        function admDeleteUser(phone) {
+            if(confirm("Are you ABSOLUTELY SURE you want to block/delete user " + phone + "? This cannot be undone!")) {
+                db.ref('users/u_' + phone).remove().then(() => {
+                    alert("User removed successfully.");
+                    document.getElementById('admUserSearchResult').innerHTML = "";
+                });
+            }
+        }
+
+        function admReleaseIncome() {
+            const todayStr = new Date().toDateString();
+            
+            db.ref('settings/miningStatus').once('value', snap => {
+                const status = snap.val();
+                if(status && status.date === todayStr && status.released) {
+                    alert("Income already released for today!");
+                    return;
+                }
+
+                if(confirm("Are you sure you want to automatically distribute today's mining income to all users?")) {
+                    db.ref('investments').once('value', invSnap => {
+                        const allInvs = invSnap.val();
+                        if (allInvs) {
+                            Object.keys(allInvs).forEach(uid => {
+                                let totalDaily = 0;
+                                const userInvs = allInvs[uid];
+                                Object.values(userInvs).forEach(inv => {
+                                    totalDaily += parseInt(inv.daily || 0);
+                                });
+                                
+                                if (totalDaily > 0) {
+                                    db.ref('users/' + uid).once('value', uSnap => {
+                                        if (uSnap.exists()) {
+                                            const u = uSnap.val();
+                                            // Check if not already added today to prevent double adding
+                                            if (u.lastMiningCollection !== todayStr) {
+                                                db.ref('users/' + uid).update({
+                                                    balance: (u.balance || 0) + totalDaily,
+                                                    today: (u.today || 0) + totalDaily,
+                                                    totalIncome: (u.totalIncome || 0) + totalDaily,
+                                                    lastMiningCollection: todayStr
+                                                });
+                                            }
+                                        }
+                                    });
+                                }
+                            });
+                        }
+                        
+                        db.ref('settings/miningStatus').set({ date: todayStr, released: true });
+                        alert("Income distributed to all users successfully!");
+                    });
+                }
+            });
+        }
+
+        function admGenGift() {
+            const amt = parseInt(document.getElementById('admGiftAmt').value);
+            if(!amt) { alert("Enter Amount"); return; }
+            const code = "GIFT-" + Math.random().toString(36).substring(2,8).toUpperCase();
+            db.ref('giftCodes/' + code).set({ amount: amt, status: 'active' });
+            alert("Code Generated: " + code);
+            document.getElementById('admGiftAmt').value = "";
+        }
+
+        function approveDep(key, uid, amt) {
+            db.ref('deposits/' + key).update({ status: 'approved' });
+            db.ref('users/' + uid).once('value', s => {
+                const curDep = s.val().totalDep || 0;
+                db.ref('users/' + uid).update({ 
+                    balance: s.val().balance + amt,
+                    totalDep: curDep + amt
+                });
+            });
+        }
+
+        function admRejectDeposit(key) {
+            if(confirm("Are you sure you want to REJECT this deposit?")) {
+                db.ref('deposits/' + key).update({ status: 'rejected' });
+                alert("Deposit Rejected.");
+            }
+        }
+
+        function admApproveWithdraw(key) {
+            db.ref('withdrawals/' + key).update({ status: 'paid' });
+            alert("Withdrawal Marked as PAID");
+        }
+
+        function admRejectWithdraw(key, uid, amount) {
+            db.ref('withdrawals/' + key).update({ status: 'rejected' });
+            db.ref('users/' + uid).once('value', snap => {
+                if(snap.exists()) {
+                    const u = snap.val();
+                    const refundBal = (u.balance || 0) + parseInt(amount);
+                    const fixTotalWith = (u.totalWith || 0) - parseInt(amount);
+                    db.ref('users/' + uid).update({ balance: refundBal, totalWith: fixTotalWith });
+                    alert("Withdrawal Rejected. User Refunded " + amount + " ETB");
+                }
+            });
+        }
+
+        function admAddPlan() {
+            const name = document.getElementById('admName').value;
+            const img = document.getElementById('admImg').value;
+            const price = parseInt(document.getElementById('admPrice').value);
+            const daily = parseInt(document.getElementById('admDaily').value);
+            const days = parseInt(document.getElementById('admDays').value); 
+            const limit = parseInt(document.getElementById('admLimit').value);
+
+            if(!name || !price || !daily || !days) { alert("Missing Fields"); return; }
+
+            const planData = { name: name, img: img, price: price, daily: daily, days: days, limit: limit || 10 };
+
+            if (editingPlanId) {
+                db.ref('plans/' + editingPlanId).update(planData);
+                alert("Plan Updated Successfully");
+                admCancelEdit(); 
+            } else {
+                db.ref('plans').push(planData);
+                alert("New Plan Added");
+                admCancelEdit(); 
+            }
+        }
+
+        function admEditPlan(key, name, price, daily, img, days, limit) {
+            editingPlanId = key;
+            document.getElementById('admName').value = name;
+            document.getElementById('admPrice').value = price;
+            document.getElementById('admDaily').value = daily;
+            document.getElementById('admImg').value = img;
+            document.getElementById('admDays').value = days;
+            document.getElementById('admLimit').value = limit;
+
+            document.getElementById('btnSavePlan').innerText = "Update Plan";
+            document.getElementById('btnSavePlan').style.background = "var(--warning)";
+            document.getElementById('btnSavePlan').style.color = "black";
+            document.getElementById('btnCancelEdit').style.display = "block";
+            document.getElementById('admName').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function admDeletePlan(key) {
+            if(confirm("Are you sure you want to delete this plan?")) { db.ref('plans/' + key).remove(); }
+        }
+
+        function admCancelEdit() {
+            editingPlanId = null;
+            document.getElementById('admName').value = "";
+            document.getElementById('admImg').value = "";
+            document.getElementById('admPrice').value = "";
+            document.getElementById('admDaily').value = "";
+            document.getElementById('admDays').value = "";
+            document.getElementById('admLimit').value = "";
+            
+            document.getElementById('btnSavePlan').innerText = "Add New Plan";
+            document.getElementById('btnSavePlan').style.background = "var(--success)";
+            document.getElementById('btnSavePlan').style.color = "white";
+            document.getElementById('btnCancelEdit').style.display = "none";
+        }
+
+        function admAddBank() {
+            const name = document.getElementById('admBankName').value;
+            const num = document.getElementById('admBankNum').value;
+            const holder = document.getElementById('admBankHolder').value;
+            if(!name || !num || !holder) { alert("Fill all fields"); return; }
+            db.ref('settings/depositMethods').push({ name, num, holder });
+            alert("Payment Method Added");
+            document.getElementById('admBankName').value = "";
+            document.getElementById('admBankNum').value = "";
+            document.getElementById('admBankHolder').value = "";
+        }
+
+        function admDelBank(key) {
+            if(confirm("Delete this payment method?")) { db.ref('settings/depositMethods/' + key).remove(); }
+        }
+    </script>
+</body>
+</html>}
+        /* --- MODERN CLEAN THEME VARIABLES --- */
+        :root {
+            --primary: #2563eb; 
+            --primary-hover: #1d4ed8;
+            --secondary: #f1f5f9; 
+            --bg-color: #f8fafc; 
+            --surface: #ffffff; 
+            --text-dark: #0f172a; 
+            --text-muted: #64748b; 
+            --success: #10b981; 
+            --danger: #ef4444; 
+            --warning: #f59e0b; 
+            --border: #e2e8f0; 
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --radius: 16px;
+        }
+
+        * { box-sizing: border-box; outline: none; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            margin: 0; padding: 0;
+            background: url('https://img.freepik.com/premium-photo/modern-dark-theme-background-with-abstract-geometric-shapes_1106493-429563.jpg?semt=ais_hybrid&w=740&q=80') no-repeat center center fixed;
+            background-size: cover;
+            color: var(--text-dark);
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            top: 0 !important; /* Prevents Google Translate body shift */
+        }
+
         /* --- Hide Google Translate default elements --- */
         .skiptranslate { display: none !important; }
         #google_translate_element { display: none !important; }
